@@ -1,0 +1,132 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, TextField, IconButton } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import MenuIcon from "@mui/icons-material/Menu";
+
+const categories = [
+  {
+    name: "Home Specialist",
+    subcategories: ["Electrician", "Plumber", "Carpenter"],
+  },
+  {
+    name: "Electronics",
+    subcategories: ["Laptops", "Phones", "Cameras"],
+  },
+  {
+    name: "Clothing",
+    subcategories: ["Men", "Women", "Kids"],
+  },
+  {
+    name: "Sports",
+    subcategories: ["Football", "Basketball", "Tennis"],
+  },
+  {
+    name: "Mechanics",
+    subcategories: ["Car", "Bike"],
+  },
+  {
+    name: "Car",
+    subcategories: ["Oil Change", "Diagnostics", "Tire Change"], 
+  },
+  {
+    name: "Bike",
+    subcategories: [],  
+  },
+];
+
+const Header = () => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [subAnchorEl, setSubAnchorEl] = useState<null | HTMLElement>(null);
+  const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([]);
+  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const open = Boolean(anchorEl);
+  const subOpen = Boolean(subAnchorEl);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleSubMenuOpen = (event: React.MouseEvent<HTMLElement>, category: string) => {
+    setAnchorEl(null); // Close main menu
+    const categoryData = categories.find(cat => cat.name === category);
+    if (categoryData) {
+      setSelectedSubcategories(categoryData.subcategories);
+      setSelectedCategory(category);
+    }
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+    setSubAnchorEl(null);
+  };
+
+  return (
+    <AppBar position="static" sx={{ bgcolor: "white", boxShadow: 1 }}>
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
+        {/* Logo would be here*/}
+        <Typography variant="h6" sx={{ fontWeight: "bold", color: "black" }}>
+          <Link href="/" style={{ textDecoration: "none", color: "green" }}>DoDone</Link>
+        </Typography>
+
+        {/* Categories Dropdown */}
+        <div>
+          <Button
+            aria-controls="category-menu"
+            aria-haspopup="true"
+            onClick={handleMenuOpen}
+            sx={{ color: "black" }}
+            startIcon={<MenuIcon />}
+          >
+            Categories
+          </Button>
+          <Menu id="category-menu" anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
+            {categories.map((category) => (
+              <MenuItem
+                key={category.name}
+                onClick={(event) => handleSubMenuOpen(event, category.name)}
+              >
+                {category.name}
+              </MenuItem>
+            ))}
+          </Menu>
+        </div>
+
+        {/* Subcategories Menu */}
+        {selectedCategory && (
+          <Menu id="subcategory-menu" anchorEl={subAnchorEl} open={subOpen} onClose={handleMenuClose}>
+            {selectedSubcategories.map((sub) => (
+              <MenuItem key={sub} onClick={handleMenuClose}>
+                {sub}
+              </MenuItem>
+            ))}
+          </Menu>
+        )}
+
+        {/* Search Bar */}
+        <div style={{ display: "flex", alignItems: "center", border: "1px solid #ccc", borderRadius: "1.5em", padding: "4px 8px" }}>
+          <TextField
+            variant="standard"
+            placeholder="Search..."
+            sx={{ width: "160px", "& .MuiInputBase-root": { borderBottom: "none" } }}
+            InputProps={{ disableUnderline: true }}
+          />
+          <IconButton>
+            <SearchIcon />
+          </IconButton>
+        </div>
+
+        {/* Register Button */}
+        <Link href="/register" passHref>
+          <Button variant="contained" sx={{ borderRadius: "1.5em", bgcolor: "blue.600", color: "white", "&:hover": { bgcolor: "blue.700" } }}>
+            Register
+          </Button>
+        </Link>
+      </Toolbar>
+    </AppBar>
+  );
+};
+
+export default Header;
