@@ -6,6 +6,17 @@ import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, TextField, IconBut
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 
+// Define types for the categories
+interface Subcategory {
+  name: string;
+  subcategories?: string[];
+}
+
+interface Category {
+  name: string;
+  subcategories: Subcategory[] | string[];
+}
+
 const categories = [
   {
     name: "Home Specialist",
@@ -16,24 +27,29 @@ const categories = [
     subcategories: ["Laptops", "Phones", "Cameras"],
   },
   {
-    name: "Clothing",
+    name: "Clothing Repair",
     subcategories: ["Men", "Women", "Kids"],
   },
   {
-    name: "Sports",
-    subcategories: ["Football", "Basketball", "Tennis"],
-  },
-  {
     name: "Mechanics",
-    subcategories: ["Car", "Bike"],
-  },
-  {
-    name: "Car",
-    subcategories: ["Oil Change", "Diagnostics", "Tire Change"], 
-  },
-  {
-    name: "Bike",
-    subcategories: [],  
+    subcategories: [
+      {
+        name: "Car",
+        subcategories: ["Oil Change", "Diagnostics", "Tire Change"],
+      },
+      {
+        name: "Bike",
+        subcategories: ["Wheel Alignment", "Brake Service", "Chain Replacement"],
+      },
+      {
+        name: "Motorcycle",
+        subcategories: ["Oil Change", "Tire Change", "Chain Replacement"],
+      },
+      {
+        name: "Boat",
+        subcategories: ["Engine Repair", "Hull Repair", "Electrical Repair"],
+      },
+    ],
   },
 ];
 
@@ -50,13 +66,22 @@ const Header = () => {
   };
 
   const handleSubMenuOpen = (event: React.MouseEvent<HTMLElement>, category: string) => {
-    setAnchorEl(null); // Close main menu
-    const categoryData = categories.find(cat => cat.name === category);
+    setAnchorEl(null); // Close the main menu
+  
+    // Type assertion here to specify the structure of categoryData
+    const categoryData = categories.find((cat) => cat.name === category) as {
+      name: string;
+      subcategories: string[];
+    };
+  
     if (categoryData) {
       setSelectedSubcategories(categoryData.subcategories);
       setSelectedCategory(category);
+      setSubAnchorEl(event.currentTarget); // Open sub-menu
     }
   };
+  
+  
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -64,9 +89,9 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "white", boxShadow: 1 }}>
+    <AppBar position="static" sx={{ bgcolor: "white", boxShadow: 2 }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
-        {/* Logo would be here*/}
+        {/* Logo */}
         <Typography variant="h6" sx={{ fontWeight: "bold", color: "black" }}>
           <Link href="/" style={{ textDecoration: "none", color: "green" }}>DoDone</Link>
         </Typography>
@@ -106,7 +131,7 @@ const Header = () => {
         )}
 
         {/* Search Bar */}
-        <div style={{ display: "flex", alignItems: "center", border: "1px solid #ccc", borderRadius: "1.5em", padding: "4px 8px" }}>
+        <div style={{ display: "flex", alignItems: "center", border: "1px solid #ccc", borderRadius: "1.35em", padding: "4px 8px" }}>
           <TextField
             variant="standard"
             placeholder="Search..."
@@ -120,7 +145,15 @@ const Header = () => {
 
         {/* Register Button */}
         <Link href="/register" passHref>
-          <Button variant="contained" sx={{ borderRadius: "1.5em", bgcolor: "blue.600", color: "white", "&:hover": { bgcolor: "blue.700" } }}>
+          <Button
+            variant="contained"
+            sx={{
+              borderRadius: "1.35em",
+              bgcolor: "green",
+              color: "white",
+              "&:hover": { bgcolor: "darkgreen" },
+            }}
+          >
             Register
           </Button>
         </Link>
