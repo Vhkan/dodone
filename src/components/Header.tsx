@@ -23,15 +23,15 @@ const categories = [
     subcategories: ["Electrician", "Plumber", "Carpenter"],
   },
   {
-    name: "Electronics",
-    subcategories: ["Laptops", "Phones", "Cameras"],
+    name: "Electronics Repair",
+    subcategories: ["Laptops", "Phones", "Tablets", "Home Appliances"],
   },
   {
     name: "Clothing Repair",
     subcategories: ["Men", "Women", "Kids"],
   },
   {
-    name: "Mechanics",
+    name: "Auto Repair",
     subcategories: [
       {
         name: "Car",
@@ -80,7 +80,6 @@ const Header = () => {
       setSubAnchorEl(event.currentTarget); // Open sub-menu
     }
   };
-  
   
 
   const handleMenuClose = () => {
@@ -131,7 +130,7 @@ const Header = () => {
         )}
 
         {/* Search Bar */}
-        <div style={{ display: "flex", alignItems: "center", border: "1px solid #ccc", borderRadius: "1.35em", padding: "4px 8px" }}>
+        <div style={{ display: "flex", alignItems: "center", border: "1px solid #ccc", borderRadius: "1.5em", padding: "4px 8px" }}>
           <TextField
             variant="standard"
             placeholder="Search..."
@@ -148,7 +147,7 @@ const Header = () => {
           <Button
             variant="contained"
             sx={{
-              borderRadius: "1.35em",
+              borderRadius: "1.5em",
               bgcolor: "green",
               color: "white",
               "&:hover": { bgcolor: "darkgreen" },
