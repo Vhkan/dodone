@@ -6,7 +6,7 @@ import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, TextField, IconBut
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 
-// Define types for the categories
+//Types for categories
 interface Subcategory {
   name: string;
   subcategories?: string[];
@@ -88,11 +88,12 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "white", boxShadow: 2 }}>
+    <AppBar position="static" sx={{ bgcolor: "grey.300", boxShadow: 2 }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
-        {/* Logo */}
+        {/* Logo and Title */}  
+        <img src="/doDone1.jpg" alt="doDone Logo" style={{ height: 65, width: "auto", marginLeft: "-1.5em" }}/>
         <Typography variant="h6" sx={{ fontWeight: "bold", color: "black" }}>
-          <Link href="/" style={{ textDecoration: "none", color: "green" }}>DoDone</Link>
+          {/* <Link href="/" style={{ textDecoration: "none", color: "green" }}>DoDone</Link> */}
         </Typography>
 
         {/* Categories Dropdown */}
