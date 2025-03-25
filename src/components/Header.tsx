@@ -2,7 +2,16 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { AppBar, Toolbar, Typography, Button, Menu, MenuItem, TextField, IconButton } from "@mui/material";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  Menu,
+  MenuItem,
+  TextField,
+  IconButton,
+} from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -39,7 +48,11 @@ const categories = [
       },
       {
         name: "Bike",
-        subcategories: ["Wheel Alignment", "Brake Service", "Chain Replacement"],
+        subcategories: [
+          "Wheel Alignment",
+          "Brake Service",
+          "Chain Replacement",
+        ],
       },
       {
         name: "Motorcycle",
@@ -56,8 +69,10 @@ const categories = [
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [subAnchorEl, setSubAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(
+    []
+  );
+  const [selectedCategory, setSelectedCategory] = useState<string>("");
   const open = Boolean(anchorEl);
   const subOpen = Boolean(subAnchorEl);
 
@@ -65,22 +80,24 @@ const Header = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleSubMenuOpen = (event: React.MouseEvent<HTMLElement>, category: string) => {
+  const handleSubMenuOpen = (
+    event: React.MouseEvent<HTMLElement>,
+    category: string
+  ) => {
     setAnchorEl(null); // Close the main menu
-  
+
     // Type assertion here to specify the structure of categoryData
     const categoryData = categories.find((cat) => cat.name === category) as {
       name: string;
       subcategories: string[];
     };
-  
+
     if (categoryData) {
       setSelectedSubcategories(categoryData.subcategories);
       setSelectedCategory(category);
       setSubAnchorEl(event.currentTarget); // Open sub-menu
     }
   };
-  
 
   const handleMenuClose = () => {
     setAnchorEl(null);
@@ -90,8 +107,12 @@ const Header = () => {
   return (
     <AppBar position="static" sx={{ bgcolor: "grey.300", boxShadow: 2 }}>
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
-        {/* Logo and Title */}  
-        <img src="/doDone1.jpg" alt="doDone Logo" style={{ height: 65, width: "auto", marginLeft: "-1.5em" }}/>
+        {/* Logo and Title */}
+        <img
+          src="/doDone1.jpg"
+          alt="doDone Logo"
+          style={{ height: 65, width: "auto", marginLeft: "-1.5em" }}
+        />
         <Typography variant="h6" sx={{ fontWeight: "bold", color: "black" }}>
           {/* <Link href="/" style={{ textDecoration: "none", color: "green" }}>DoDone</Link> */}
         </Typography>
@@ -107,7 +128,30 @@ const Header = () => {
           >
             Categories
           </Button>
-          <Menu id="category-menu" anchorEl={anchorEl} open={open} onClose={handleMenuClose}>
+
+          <Button
+            variant="contained"
+            sx={{
+              backgroundColor: "#1976d2",
+              color: "white",
+              padding: "5px 15px",
+              borderRadius: "2em",
+              textTransform: "none",
+              marginLeft: "9em",
+              "&:hover": {
+                backgroundColor: "#1565c0",
+              },
+            }}
+          >
+            Request a Service
+          </Button>
+
+          <Menu
+            id="category-menu"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={handleMenuClose}
+          >
             {categories.map((category) => (
               <MenuItem
                 key={category.name}
@@ -121,7 +165,12 @@ const Header = () => {
 
         {/* Subcategories Menu */}
         {selectedCategory && (
-          <Menu id="subcategory-menu" anchorEl={subAnchorEl} open={subOpen} onClose={handleMenuClose}>
+          <Menu
+            id="subcategory-menu"
+            anchorEl={subAnchorEl}
+            open={subOpen}
+            onClose={handleMenuClose}
+          >
             {selectedSubcategories.map((sub) => (
               <MenuItem key={sub} onClick={handleMenuClose}>
                 {sub}
@@ -131,11 +180,22 @@ const Header = () => {
         )}
 
         {/* Search Bar */}
-        <div style={{ display: "flex", alignItems: "center", border: "1px solid #ccc", borderRadius: "1.5em", padding: "4px 8px" }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            border: "1px solid #ccc",
+            borderRadius: "1.5em",
+            padding: "4px 8px",
+          }}
+        >
           <TextField
             variant="standard"
             placeholder="Search..."
-            sx={{ width: "160px", "& .MuiInputBase-root": { borderBottom: "none" } }}
+            sx={{
+              width: "160px",
+              "& .MuiInputBase-root": { borderBottom: "none" },
+            }}
             InputProps={{ disableUnderline: true }}
           />
           <IconButton>
@@ -148,10 +208,15 @@ const Header = () => {
           <Button
             variant="contained"
             sx={{
-              borderRadius: "1.5em",
-              bgcolor: "green",
+              backgroundColor: "#1976d2",
               color: "white",
-              "&:hover": { bgcolor: "darkgreen" },
+              padding: "5px 15px",
+              borderRadius: "2em",
+              textTransform: "none",
+              marginLeft: "9em",
+              "&:hover": {
+                backgroundColor: "#1565c0",
+              },
             }}
           >
             Register
