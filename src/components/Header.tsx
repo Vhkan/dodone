@@ -105,7 +105,13 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ bgcolor: "grey.300", boxShadow: 2 }}>
+    <AppBar
+      position="static"
+      sx={{
+        background: "linear-gradient(to bottom, #B0B0B0, #FFFFFF)",
+        boxShadow: 2,
+      }}
+    >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
         {/* Logo and Title */}
         <img
@@ -128,18 +134,27 @@ const Header = () => {
           >
             Categories
           </Button>
-
           <Button
             variant="contained"
             sx={{
-              backgroundColor: "#1976d2",
+              background: "linear-gradient(45deg, #00c6ff, #0072ff)", // Blue to purple gradient
               color: "white",
               padding: "5px 15px",
               borderRadius: "2em",
               textTransform: "none",
               marginLeft: "9em",
+              fontWeight: "bold",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              transition:
+                "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease", // Only transition these properties
               "&:hover": {
-                backgroundColor: "#1565c0",
+                background: "linear-gradient(45deg, #0072ff, #00c6ff)", 
+                boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+                transform: "scale(1.05)",
+              },
+              "&:focus": {
+                outline: "none",
+                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)", // Blue glow on focus
               },
             }}
           >
@@ -208,14 +223,23 @@ const Header = () => {
           <Button
             variant="contained"
             sx={{
-              backgroundColor: "#1976d2",
+              background: "linear-gradient(45deg, #00c6ff, #0072ff)", // Blue to purple gradient
               color: "white",
               padding: "5px 15px",
               borderRadius: "2em",
               textTransform: "none",
               marginLeft: "9em",
+              fontWeight: "bold",
+              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+              transition: "all 0.3s ease",
               "&:hover": {
-                backgroundColor: "#1565c0",
+                background: "linear-gradient(45deg, #0072ff, #00c6ff)", // Reversed gradient on hover
+                boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+                transform: "scale(1.05)",
+              },
+              "&:focus": {
+                outline: "none",
+                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)", // Blue glow on focus
               },
             }}
           >
