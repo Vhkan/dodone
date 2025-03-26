@@ -132,7 +132,7 @@ const Header = () => {
             sx={{
               background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)", // Light gradient effect
               color: "black",
-              padding: "8px 16px",
+              padding: "7px 19px",
               borderRadius: "2em",
               fontWeight: "bold",
               textTransform: "none",
@@ -160,7 +160,7 @@ const Header = () => {
             sx={{
               background: "linear-gradient(45deg, #00c6ff, #0072ff)", // Blue to purple gradient
               color: "white",
-              padding: "5px 15px",
+              padding: "7px 19px",
               borderRadius: "2em",
               textTransform: "none",
               marginLeft: "9em",
@@ -246,7 +246,7 @@ const Header = () => {
             sx={{
               background: "linear-gradient(45deg, #00c6ff, #0072ff)", // Blue to purple gradient
               color: "white",
-              padding: "5px 15px",
+              padding: "7px 19px",
               borderRadius: "2em",
               textTransform: "none",
               marginLeft: "9em",
