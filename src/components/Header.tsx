@@ -129,11 +129,32 @@ const Header = () => {
             aria-controls="category-menu"
             aria-haspopup="true"
             onClick={handleMenuOpen}
-            sx={{ color: "black" }}
+            sx={{
+              background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)", // Light gradient effect
+              color: "black",
+              padding: "8px 16px",
+              borderRadius: "2em",
+              fontWeight: "bold",
+              textTransform: "none",
+              gap: "8px",
+              boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", // Subtle shadow
+              transition:
+                "background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease",
+              "&:hover": {
+                background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)", // Slightly darker on hover
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)",
+                // transform: "scale(1.05)", // Slight pop effect
+              },
+              "&:focus": {
+                outline: "none",
+                boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.2)", // Glow effect on focus
+              },
+            }}
             startIcon={<MenuIcon />}
           >
             Categories
           </Button>
+
           <Button
             variant="contained"
             sx={{
@@ -148,7 +169,7 @@ const Header = () => {
               transition:
                 "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease", // Only transition these properties
               "&:hover": {
-                background: "linear-gradient(45deg, #0072ff, #00c6ff)", 
+                background: "linear-gradient(45deg, #0072ff, #00c6ff)",
                 boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
                 transform: "scale(1.05)",
               },
