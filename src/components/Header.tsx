@@ -222,7 +222,7 @@ const Header = () => {
             alignItems: "center",
             border: "1px solid #ccc",
             borderRadius: "1.5em",
-            padding: "4px 8px",
+            padding: "2px 4px",
           }}
         >
           <TextField
