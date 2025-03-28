@@ -91,23 +91,37 @@ const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [subAnchorEl, setSubAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedCategory, setSelectedCategory] = useState<Subcategory | null>(null);
+  const [selectedMainCategory, setSelectedMainCategory] = useState<Subcategory | null>(null);
 
   const handleMainMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
     setSubAnchorEl(null);
+    setSelectedCategory(null);
+    setSelectedMainCategory(null);
+  };
+
+  const handleMainCategorySelect = (category: Subcategory) => {
+    setSelectedMainCategory(category);
+    setSelectedCategory(null);
+    
+    // If the category has nested subcategories, keep the menu open
+    if (category.subcategories && category.subcategories.length > 0) {
+      // Anchor the submenu to the same element
+      setSubAnchorEl(anchorEl);
+    } else {
+      // If no nested subcategories, close the menu
+      setAnchorEl(null);
+      setSubAnchorEl(null);
+    }
   };
 
   const handleCategorySelect = (category: Subcategory) => {
     setSelectedCategory(category);
     
-    // If the category has subcategories, open the submenu
+    // If the category has subcategories, keep the submenu open
     if (category.subcategories && category.subcategories.length > 0) {
-      // Find the button that was just clicked to anchor the submenu
-      const categoryButton = document.querySelector(`[data-category="${category.name}"]`);
-      
-      if (categoryButton) {
-        setSubAnchorEl(categoryButton as HTMLElement);
-      }
+      // Anchor the submenu to the same element
+      setSubAnchorEl(anchorEl);
     } else {
       // If no subcategories, close both menus
       setAnchorEl(null);
@@ -127,6 +141,8 @@ const Header = () => {
   const handleMenuClose = () => {
     setAnchorEl(null);
     setSubAnchorEl(null);
+    setSelectedCategory(null);
+    setSelectedMainCategory(null);
   };
 
   return (
@@ -155,23 +171,23 @@ const Header = () => {
             aria-haspopup="true"
             onClick={handleMainMenuOpen}
             sx={{
-              background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)", // Light gradient effect
+              background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)",
               color: "black",
               padding: "7px 19px",
               borderRadius: "2em",
               fontWeight: "bold",
               textTransform: "none",
               gap: "8px",
-              boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)", // Subtle shadow
+              boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
               transition:
                 "background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease",
               "&:hover": {
-                background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)", // Slightly darker on hover
+                background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)",
                 boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)",
               },
               "&:focus": {
                 outline: "none",
-                boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.2)", // Glow effect on focus
+                boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.2)",
               },
             }}
             startIcon={<MenuIcon />}
@@ -182,7 +198,7 @@ const Header = () => {
           <Button
             variant="contained"
             sx={{
-              background: "linear-gradient(45deg, #00c6ff, #0072ff)", // Blue to purple gradient
+              background: "linear-gradient(45deg, #00c6ff, #0072ff)",
               color: "white",
               padding: "7px 19px",
               borderRadius: "2em",
@@ -191,7 +207,7 @@ const Header = () => {
               fontWeight: "bold",
               boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
               transition:
-                "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease", // Only transition these properties
+                "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
               "&:hover": {
                 background: "linear-gradient(45deg, #0072ff, #00c6ff)",
                 boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
@@ -199,7 +215,7 @@ const Header = () => {
               },
               "&:focus": {
                 outline: "none",
-                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)", // Blue glow on focus
+                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
               },
             }}
           >
@@ -224,8 +240,7 @@ const Header = () => {
             {categories.map((category) => (
               <MenuItem
                 key={category.name}
-                data-category={category.name}
-                onClick={() => handleCategorySelect(category)}
+                onClick={() => handleMainCategorySelect(category)}
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-between',
@@ -244,7 +259,7 @@ const Header = () => {
           <Menu
             id="subcategory-menu"
             anchorEl={subAnchorEl}
-            open={Boolean(subAnchorEl)}
+            open={Boolean(subAnchorEl) && (selectedMainCategory?.subcategories || []).length > 0}
             onClose={handleMenuClose}
             anchorOrigin={{
               vertical: 'top',
@@ -255,6 +270,41 @@ const Header = () => {
               horizontal: 'left',
             }}
           >
+            {/* First level subcategories */}
+            {selectedMainCategory?.subcategories?.map((subcategory) => (
+              <MenuItem
+                key={subcategory.name}
+                onClick={() => handleCategorySelect(subcategory)}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                {subcategory.name}
+                {subcategory.subcategories && subcategory.subcategories.length > 0 && (
+                  <ArrowRightIcon fontSize="small" />
+                )}
+              </MenuItem>
+            ))}
+          </Menu>
+
+          {/* Third level Subcategories Menu */}
+          <Menu
+            id="third-level-subcategory-menu"
+            anchorEl={subAnchorEl}
+            open={Boolean(subAnchorEl) && (selectedCategory?.subcategories || []).length > 0}
+            onClose={handleMenuClose}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+          >
+            {/* Third level subcategories */}
             {selectedCategory?.subcategories?.map((subcategory) => (
               <MenuItem
                 key={subcategory.name}
@@ -266,7 +316,8 @@ const Header = () => {
           </Menu>
         </div>
 
-        {/* Search Bar */}
+        {/* Rest of the component remains the same */}
+        {/* Search Bar and Register Button */}
         <div
           style={{
             display: "flex",
@@ -290,12 +341,11 @@ const Header = () => {
           </IconButton>
         </div>
 
-        {/* Register Button */}
         <Link href="/register" passHref>
           <Button
             variant="contained"
             sx={{
-              background: "linear-gradient(45deg, #00c6ff, #0072ff)", // Blue to purple gradient
+              background: "linear-gradient(45deg, #00c6ff, #0072ff)",
               color: "white",
               padding: "7px 19px",
               borderRadius: "2em",
@@ -305,13 +355,13 @@ const Header = () => {
               boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
               transition: "all 0.3s ease",
               "&:hover": {
-                background: "linear-gradient(45deg, #0072ff, #00c6ff)", // Reversed gradient on hover
+                background: "linear-gradient(45deg, #0072ff, #00c6ff)",
                 boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
                 transform: "scale(1.05)",
               },
               "&:focus": {
                 outline: "none",
-                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)", // Blue glow on focus
+                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
               },
             }}
           >
