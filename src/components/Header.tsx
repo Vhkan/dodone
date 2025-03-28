@@ -14,89 +14,114 @@ import {
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
-//Types for categories
+// Types for categories
 interface Subcategory {
   name: string;
-  subcategories?: string[];
+  subcategories?: Subcategory[];
 }
 
-interface Category {
-  name: string;
-  subcategories: Subcategory[] | string[];
-}
-
-const categories = [
+const categories: Subcategory[] = [
   {
     name: "Home Specialist",
-    subcategories: ["Electrician", "Plumber", "Carpenter"],
+    subcategories: [
+      { name: "Electrician" },
+      { name: "Plumber" },
+      { name: "Carpenter" }
+    ]
   },
   {
     name: "Electronics Repair",
-    subcategories: ["Laptops", "Phones", "Tablets", "Home Appliances"],
+    subcategories: [
+      { name: "Laptops" },
+      { name: "Phones" },
+      { name: "Tablets" },
+      { name: "Home Appliances" }
+    ]
   },
   {
     name: "Clothing Repair",
-    subcategories: ["Men", "Women", "Kids"],
+    subcategories: [
+      { name: "Men" },
+      { name: "Women" },
+      { name: "Kids" }
+    ]
   },
   {
     name: "Auto Repair",
     subcategories: [
       {
         name: "Car",
-        subcategories: ["Oil Change", "Diagnostics", "Tire Change"],
+        subcategories: [
+          { name: "Oil Change" },
+          { name: "Diagnostics" },
+          { name: "Tire Change" }
+        ]
       },
       {
         name: "Bike",
         subcategories: [
-          "Wheel Alignment",
-          "Brake Service",
-          "Chain Replacement",
-        ],
+          { name: "Wheel Alignment" },
+          { name: "Brake Service" },
+          { name: "Chain Replacement" }
+        ]
       },
       {
         name: "Motorcycle",
-        subcategories: ["Oil Change", "Tire Change", "Chain Replacement"],
+        subcategories: [
+          { name: "Oil Change" },
+          { name: "Tire Change" },
+          { name: "Chain Replacement" }
+        ]
       },
       {
         name: "Boat",
-        subcategories: ["Engine Repair", "Hull Repair", "Electrical Repair"],
-      },
-    ],
-  },
+        subcategories: [
+          { name: "Engine Repair" },
+          { name: "Hull Repair" },
+          { name: "Electrical Repair" }
+        ]
+      }
+    ]
+  }
 ];
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [subAnchorEl, setSubAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedSubcategories, setSelectedSubcategories] = useState<string[]>(
-    []
-  );
-  const [selectedCategory, setSelectedCategory] = useState<string>("");
-  const open = Boolean(anchorEl);
-  const subOpen = Boolean(subAnchorEl);
+  const [selectedCategory, setSelectedCategory] = useState<Subcategory | null>(null);
 
-  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleMainMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
+    setSubAnchorEl(null);
   };
 
-  const handleSubMenuOpen = (
-    event: React.MouseEvent<HTMLElement>,
-    category: string
-  ) => {
-    setAnchorEl(null); // Close the main menu
-
-    // Type assertion here to specify the structure of categoryData
-    const categoryData = categories.find((cat) => cat.name === category) as {
-      name: string;
-      subcategories: string[];
-    };
-
-    if (categoryData) {
-      setSelectedSubcategories(categoryData.subcategories);
-      setSelectedCategory(category);
-      setSubAnchorEl(event.currentTarget); // Open sub-menu
+  const handleCategorySelect = (category: Subcategory) => {
+    setSelectedCategory(category);
+    
+    // If the category has subcategories, open the submenu
+    if (category.subcategories && category.subcategories.length > 0) {
+      // Find the button that was just clicked to anchor the submenu
+      const categoryButton = document.querySelector(`[data-category="${category.name}"]`);
+      
+      if (categoryButton) {
+        setSubAnchorEl(categoryButton as HTMLElement);
+      }
+    } else {
+      // If no subcategories, close both menus
+      setAnchorEl(null);
+      setSubAnchorEl(null);
     }
+  };
+
+  const handleSubcategorySelect = (subcategory: Subcategory) => {
+    // Handle subcategory selection logic here
+    console.log('Selected Subcategory:', subcategory.name);
+    
+    // Close both menus after selection
+    setAnchorEl(null);
+    setSubAnchorEl(null);
   };
 
   const handleMenuClose = () => {
@@ -128,7 +153,7 @@ const Header = () => {
           <Button
             aria-controls="category-menu"
             aria-haspopup="true"
-            onClick={handleMenuOpen}
+            onClick={handleMainMenuOpen}
             sx={{
               background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)", // Light gradient effect
               color: "black",
@@ -143,7 +168,6 @@ const Header = () => {
               "&:hover": {
                 background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)", // Slightly darker on hover
                 boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)",
-                // transform: "scale(1.05)", // Slight pop effect
               },
               "&:focus": {
                 outline: "none",
@@ -182,38 +206,65 @@ const Header = () => {
             Request a Service
           </Button>
 
+          {/* Main Categories Menu */}
           <Menu
             id="category-menu"
             anchorEl={anchorEl}
-            open={open}
+            open={Boolean(anchorEl)}
             onClose={handleMenuClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
           >
             {categories.map((category) => (
               <MenuItem
                 key={category.name}
-                onClick={(event) => handleSubMenuOpen(event, category.name)}
+                data-category={category.name}
+                onClick={() => handleCategorySelect(category)}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
               >
                 {category.name}
+                {category.subcategories && category.subcategories.length > 0 && (
+                  <ArrowRightIcon fontSize="small" />
+                )}
+              </MenuItem>
+            ))}
+          </Menu>
+
+          {/* Subcategories Menu */}
+          <Menu
+            id="subcategory-menu"
+            anchorEl={subAnchorEl}
+            open={Boolean(subAnchorEl)}
+            onClose={handleMenuClose}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+          >
+            {selectedCategory?.subcategories?.map((subcategory) => (
+              <MenuItem
+                key={subcategory.name}
+                onClick={() => handleSubcategorySelect(subcategory)}
+              >
+                {subcategory.name}
               </MenuItem>
             ))}
           </Menu>
         </div>
-
-        {/* Subcategories Menu */}
-        {selectedCategory && (
-          <Menu
-            id="subcategory-menu"
-            anchorEl={subAnchorEl}
-            open={subOpen}
-            onClose={handleMenuClose}
-          >
-            {selectedSubcategories.map((sub) => (
-              <MenuItem key={sub} onClick={handleMenuClose}>
-                {sub}
-              </MenuItem>
-            ))}
-          </Menu>
-        )}
 
         {/* Search Bar */}
         <div
