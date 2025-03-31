@@ -28,8 +28,8 @@ const categories: Subcategory[] = [
     subcategories: [
       { name: "Electrician" },
       { name: "Plumber" },
-      { name: "Carpenter" }
-    ]
+      { name: "Carpenter" },
+    ],
   },
   {
     name: "Electronics Repair",
@@ -37,16 +37,12 @@ const categories: Subcategory[] = [
       { name: "Laptops" },
       { name: "Phones" },
       { name: "Tablets" },
-      { name: "Home Appliances" }
-    ]
+      { name: "Home Appliances" },
+    ],
   },
   {
     name: "Clothing Repair",
-    subcategories: [
-      { name: "Men" },
-      { name: "Women" },
-      { name: "Kids" }
-    ]
+    subcategories: [{ name: "Men" }, { name: "Women" }, { name: "Kids" }],
   },
   {
     name: "Auto Repair",
@@ -56,42 +52,45 @@ const categories: Subcategory[] = [
         subcategories: [
           { name: "Oil Change" },
           { name: "Diagnostics" },
-          { name: "Tire Change" }
-        ]
+          { name: "Tire Change" },
+        ],
       },
       {
         name: "Bike",
         subcategories: [
           { name: "Wheel Alignment" },
           { name: "Brake Service" },
-          { name: "Chain Replacement" }
-        ]
+          { name: "Chain Replacement" },
+        ],
       },
       {
         name: "Motorcycle",
         subcategories: [
           { name: "Oil Change" },
           { name: "Tire Change" },
-          { name: "Chain Replacement" }
-        ]
+          { name: "Chain Replacement" },
+        ],
       },
       {
         name: "Boat",
         subcategories: [
           { name: "Engine Repair" },
           { name: "Hull Repair" },
-          { name: "Electrical Repair" }
-        ]
-      }
-    ]
-  }
+          { name: "Electrical Repair" },
+        ],
+      },
+    ],
+  },
 ];
 
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [subAnchorEl, setSubAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedCategory, setSelectedCategory] = useState<Subcategory | null>(null);
-  const [selectedMainCategory, setSelectedMainCategory] = useState<Subcategory | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Subcategory | null>(
+    null
+  );
+  const [selectedMainCategory, setSelectedMainCategory] =
+    useState<Subcategory | null>(null);
 
   const handleMainMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -103,7 +102,7 @@ const Header = () => {
   const handleMainCategorySelect = (category: Subcategory) => {
     setSelectedMainCategory(category);
     setSelectedCategory(null);
-    
+
     // If the category has nested subcategories, keep the menu open
     if (category.subcategories && category.subcategories.length > 0) {
       // Anchor the submenu to the same element
@@ -117,7 +116,7 @@ const Header = () => {
 
   const handleCategorySelect = (category: Subcategory) => {
     setSelectedCategory(category);
-    
+
     // If the category has subcategories, keep the submenu open
     if (category.subcategories && category.subcategories.length > 0) {
       // Anchor the submenu to the same element
@@ -131,8 +130,8 @@ const Header = () => {
 
   const handleSubcategorySelect = (subcategory: Subcategory) => {
     // Handle subcategory selection logic here
-    console.log('Selected Subcategory:', subcategory.name);
-    
+    console.log("Selected Subcategory:", subcategory.name);
+
     // Close both menus after selection
     setAnchorEl(null);
     setSubAnchorEl(null);
@@ -165,7 +164,7 @@ const Header = () => {
         </Typography>
 
         {/* Categories Dropdown */}
-        <div>
+        <div style={{ display: 'flex', alignItems: 'center', marginRight: 'auto', gap: '1rem' }}>
           <Button
             aria-controls="category-menu"
             aria-haspopup="true"
@@ -173,7 +172,8 @@ const Header = () => {
             sx={{
               background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)",
               color: "black",
-              padding: "7px 19px",
+              padding: "10px 25px",
+              marginLeft: "10em",
               borderRadius: "2em",
               fontWeight: "bold",
               textTransform: "none",
@@ -200,10 +200,10 @@ const Header = () => {
             sx={{
               background: "linear-gradient(45deg, #00c6ff, #0072ff)",
               color: "white",
-              padding: "7px 19px",
+              padding: "10px 19px",
               borderRadius: "2em",
               textTransform: "none",
-              marginLeft: "9em",
+              marginLeft: "10em",
               fontWeight: "bold",
               boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
               transition:
@@ -229,12 +229,12 @@ const Header = () => {
             open={Boolean(anchorEl)}
             onClose={handleMenuClose}
             anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'left',
+              vertical: "bottom",
+              horizontal: "left",
             }}
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
+              vertical: "top",
+              horizontal: "left",
             }}
           >
             {categories.map((category) => (
@@ -242,15 +242,16 @@ const Header = () => {
                 key={category.name}
                 onClick={() => handleMainCategorySelect(category)}
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
                 {category.name}
-                {category.subcategories && category.subcategories.length > 0 && (
-                  <ArrowRightIcon fontSize="small" />
-                )}
+                {category.subcategories &&
+                  category.subcategories.length > 0 && (
+                    <ArrowRightIcon fontSize="small" />
+                  )}
               </MenuItem>
             ))}
           </Menu>
@@ -259,15 +260,18 @@ const Header = () => {
           <Menu
             id="subcategory-menu"
             anchorEl={subAnchorEl}
-            open={Boolean(subAnchorEl) && (selectedMainCategory?.subcategories || []).length > 0}
+            open={
+              Boolean(subAnchorEl) &&
+              (selectedMainCategory?.subcategories || []).length > 0
+            }
             onClose={handleMenuClose}
             anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
+              vertical: "top",
+              horizontal: "left",
             }}
           >
             {/* First level subcategories */}
@@ -276,15 +280,16 @@ const Header = () => {
                 key={subcategory.name}
                 onClick={() => handleCategorySelect(subcategory)}
                 sx={{
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
                 {subcategory.name}
-                {subcategory.subcategories && subcategory.subcategories.length > 0 && (
-                  <ArrowRightIcon fontSize="small" />
-                )}
+                {subcategory.subcategories &&
+                  subcategory.subcategories.length > 0 && (
+                    <ArrowRightIcon fontSize="small" />
+                  )}
               </MenuItem>
             ))}
           </Menu>
@@ -293,15 +298,18 @@ const Header = () => {
           <Menu
             id="third-level-subcategory-menu"
             anchorEl={subAnchorEl}
-            open={Boolean(subAnchorEl) && (selectedCategory?.subcategories || []).length > 0}
+            open={
+              Boolean(subAnchorEl) &&
+              (selectedCategory?.subcategories || []).length > 0
+            }
             onClose={handleMenuClose}
             anchorOrigin={{
-              vertical: 'top',
-              horizontal: 'right',
+              vertical: "top",
+              horizontal: "right",
             }}
             transformOrigin={{
-              vertical: 'top',
-              horizontal: 'left',
+              vertical: "top",
+              horizontal: "left",
             }}
           >
             {/* Third level subcategories */}
@@ -316,7 +324,6 @@ const Header = () => {
           </Menu>
         </div>
 
-        {/* Rest of the component remains the same */}
         {/* Search Bar and Register Button */}
         <div
           style={{
@@ -325,13 +332,15 @@ const Header = () => {
             border: "1px solid #ccc",
             borderRadius: "1.5em",
             padding: "2px 4px",
+            marginRight: "8em",
           }}
         >
           <TextField
             variant="standard"
-            placeholder="Search..."
+            placeholder="Find a specialist..."
             sx={{
-              width: "160px",
+              width: "15em",
+              padding: "5px",
               "& .MuiInputBase-root": { borderBottom: "none" },
             }}
             InputProps={{ disableUnderline: true }}
@@ -347,7 +356,7 @@ const Header = () => {
             sx={{
               background: "linear-gradient(45deg, #00c6ff, #0072ff)",
               color: "white",
-              padding: "7px 19px",
+              padding: "10px 19px",
               borderRadius: "2em",
               textTransform: "none",
               marginLeft: "9em",
