@@ -15,6 +15,7 @@ import {
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import LanguageIcon from "@mui/icons-material/Language";
 
 // Types for categories
 interface Subcategory {
@@ -144,6 +145,27 @@ const Header = () => {
     setSelectedMainCategory(null);
   };
 
+  //Language Menu
+  const [languageAnchorEl, setLanguageAnchorEl] = useState<null | HTMLElement>(
+    null
+  );
+  const [selectedLanguage, setSelectedLanguage] = useState("ENG"); // Default language
+
+  const handleLanguageMenuOpen = (
+    event: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    setLanguageAnchorEl(event.currentTarget);
+  };
+
+  const handleLanguageSelect = (lang: string) => {
+    setSelectedLanguage(lang);
+    setLanguageAnchorEl(null);
+  };
+
+  const handleLanguageMenuClose = () => {
+    setLanguageAnchorEl(null);
+  };
+
   return (
     <AppBar
       position="static"
@@ -162,9 +184,15 @@ const Header = () => {
         <Typography variant="h6" sx={{ fontWeight: "bold", color: "black" }}>
           {/* <Link href="/" style={{ textDecoration: "none", color: "green" }}>DoDone</Link> */}
         </Typography>
-
         {/* Categories Dropdown */}
-        <div style={{ display: 'flex', alignItems: 'center', marginRight: 'auto', gap: '1rem' }}>
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            marginRight: "auto",
+            gap: "1rem",
+          }}
+        >
           <Button
             aria-controls="category-menu"
             aria-haspopup="true"
@@ -203,7 +231,7 @@ const Header = () => {
               padding: "10px 19px",
               borderRadius: "2em",
               textTransform: "none",
-              marginLeft: "10em",
+              marginLeft: "5em",
               fontWeight: "bold",
               boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
               transition:
@@ -323,7 +351,6 @@ const Header = () => {
             ))}
           </Menu>
         </div>
-
         {/* Search Bar and Register Button */}
         <div
           style={{
@@ -332,7 +359,7 @@ const Header = () => {
             border: "1px solid #ccc",
             borderRadius: "1.5em",
             padding: "2px 4px",
-            marginRight: "8em",
+            marginRight: "12em",
           }}
         >
           <TextField
@@ -349,7 +376,51 @@ const Header = () => {
             <SearchIcon />
           </IconButton>
         </div>
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+          <Button
+            aria-controls="language-menu"
+            aria-haspopup="true"
+            onClick={handleLanguageMenuOpen}
+            sx={{
+              background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)",
+              color: "black",
+              padding: "7px 19px",
+              borderRadius: "2em",
+              fontWeight: "bold",
+              textTransform: "none",
+            }}
+            startIcon={<LanguageIcon />}
+          >
+            {selectedLanguage}
+          </Button>
 
+          {/* Language Menu */}
+          <Menu
+            id="language-menu"
+            anchorEl={languageAnchorEl}
+            open={Boolean(languageAnchorEl)}
+            onClose={handleLanguageMenuClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "left",
+            }}
+          >
+            <MenuItem onClick={() => handleLanguageSelect("ENG")}>
+              English (ENG)
+            </MenuItem>
+            <MenuItem onClick={() => handleLanguageSelect("UKR")}>
+              Українська (UKR)
+            </MenuItem>
+            <MenuItem onClick={() => handleLanguageSelect("DK")}>
+              Dansk (DK)
+            </MenuItem>
+          </Menu>
+        </div>
+        {/* Register Button */}
         <Link href="/register" passHref>
           <Button
             variant="contained"
