@@ -239,7 +239,7 @@ const Header = () => {
               "&:hover": {
                 background: "linear-gradient(45deg, #0072ff, #00c6ff)",
                 boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                transform: "scale(1.05)",
+                transform: "scale(1.02)",
               },
               "&:focus": {
                 outline: "none",
@@ -468,7 +468,7 @@ const Header = () => {
               "&:hover": {
                 background: "linear-gradient(45deg, #0072ff, #00c6ff)",
                 boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                transform: "scale(1.05)",
+                transform: "scale(1.02)",
               },
               "&:focus": {
                 outline: "none",
