@@ -358,15 +358,28 @@ const Header = () => {
             alignItems: "center",
             border: "1px solid #ccc",
             borderRadius: "1.5em",
-            padding: "2px 4px",
+            padding: "4px 8px",
             marginRight: "12em",
+            minWidth: "200px",
+            maxWidth: "300px",
+            width: "100%", // Ensures it stretches properly
+            transition: "box-shadow 0.3s ease, background 0.3s ease",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.background =
+              "linear-gradient(45deg, #e0e0e0, #d6d6d6)";
+            e.currentTarget.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.15)";
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.background = "transparent";
+            e.currentTarget.style.boxShadow = "none";
           }}
         >
           <TextField
             variant="standard"
             placeholder="Find a specialist..."
             sx={{
-              width: "15em",
+              flexGrow: 1, // Ensures it takes up available space
               padding: "5px",
               "& .MuiInputBase-root": { borderBottom: "none" },
             }}
@@ -376,7 +389,16 @@ const Header = () => {
             <SearchIcon />
           </IconButton>
         </div>
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
+
+        {/* Language Menu */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            gap: "1rem",
+            width: "5em",
+          }}
+        >
           <Button
             aria-controls="language-menu"
             aria-haspopup="true"
@@ -388,6 +410,14 @@ const Header = () => {
               borderRadius: "2em",
               fontWeight: "bold",
               textTransform: "none",
+              "&:hover": {
+                background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)",
+                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)",
+              },
+              "&:focus": {
+                outline: "none",
+                boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.2)",
+              },
             }}
             startIcon={<LanguageIcon />}
           >
@@ -420,6 +450,7 @@ const Header = () => {
             </MenuItem>
           </Menu>
         </div>
+
         {/* Register Button */}
         <Link href="/register" passHref>
           <Button
