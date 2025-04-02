@@ -1,9 +1,9 @@
 "use client";
 
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Card, Button, CardContent, Typography } from "@mui/material";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
 import BuildIcon from "@mui/icons-material/Build";
-import HandymanIcon from "@mui/icons-material/Handyman";
+import ImagesearchRollerIcon from '@mui/icons-material/ImagesearchRoller';
 import ConstructionIcon from "@mui/icons-material/Construction";
 import WeekendIcon from "@mui/icons-material/Weekend";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
@@ -14,12 +14,13 @@ import LaptopMacIcon from "@mui/icons-material/LaptopMac";
 import HomeIcon from "@mui/icons-material/Home";
 import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import CelebrationIcon from "@mui/icons-material/Celebration";
+import Link from "next/link";
 
 const categories = [
   {
     name: "Home Specialist",
     icon: <HomeRepairServiceIcon sx={{ fontSize: 60, color: "#ff9800" }} />,
-    services: ["Plumber", "Electrician", "Carpenter", "Man for an Hour"],
+    services: ["Plumber", "Electrician", "Carpenter", "Man for an Hour", "Locksmith", "Glazier", "Handyman"],
   },
   {
     name: "Appliance Technician",
@@ -34,13 +35,21 @@ const categories = [
   },
   {
     name: "Finishing Work",
-    icon: <BuildIcon sx={{ fontSize: 60, color: "#8bc34a" }} />,
+    icon: <ImagesearchRollerIcon sx={{ fontSize: 60, color: "#8bc34a" }} />,
     services: [
       "Home Renovation",
       "Tile Laying",
       "Plastering Work",
       "Insulation of Premises",
       "Heating Installation",
+      "Air Conditioning Installation",
+      "Floor Laying",
+      "Wallpapering",
+      "Painting",
+      "Parquet Laying",
+      "Laminate Laying",
+      "Drywall Installation",
+      "Ceiling Installation",
     ],
   },
   {
@@ -52,17 +61,26 @@ const categories = [
       "Turning Work",
       "Carpenter",
       "Bricklaying",
+      "Roofing Work",
+      "Facade Work",
+      "Concrete Work",
+      "Paving Work",
+      "Landscaping",
     ],
   },
   {
     name: "Furniture Services",
-    icon: <WeekendIcon sx={{ fontSize: 60, color: "#795548" }} />,
+    icon: <WeekendIcon sx={{ fontSize: 60, color: "#F5A25D" }} />,
     services: [
       "Furniture Manufacturing",
       "Furniture Repair",
       "Furniture Assembly",
       "Furniture Restoration",
       "Furniture Reupholstering",
+      "Furniture Disassembly",
+      "Furniture Moving",
+      "Furniture Design",
+      "Furniture Painting",
     ],
   },
   {
@@ -73,6 +91,12 @@ const categories = [
       "General Cleaning",
       "Renovation Cleaning",
       "Dry Cleaning",
+      "Laundry",
+      "Window Cleaning",
+      "Carpet Cleaning",
+      "Upholstery Cleaning",
+      "Pool Cleaning",
+      "Gutter Cleaning",
     ],
   },
   {
@@ -84,6 +108,15 @@ const categories = [
       "Auto Electrics",
       "Bodywork",
       "Engine",
+      "Transmission",
+      "Brakes",
+      "Suspension",
+      "Exhaust",
+      "Tires",
+      "Wheel Alignment",
+      "Auto Glass",
+      "Car Wash",
+      "Detailing",
     ],
   },
   {
@@ -95,6 +128,10 @@ const categories = [
       "Construction Waste Removal",
       "Furniture & Equipment Transportation",
       "Home or Office Moving",
+      "Packing Services",
+      "Warehousing Services",
+      "Courier Services",
+      "Express Delivery",
     ],
   },
   {
@@ -106,17 +143,26 @@ const categories = [
       "Cosmetology",
       "Eyelash Care",
       "Eyebrow Care",
+      "Fitness Trainer",
+      "Yoga Instructor",
+      "Personal Trainer",
+      "Dietician",
+      "Psychologist",
     ],
   },
   {
     name: "Household Services",
-    icon: <HomeIcon sx={{ fontSize: 60, color: "#e91e" }} />, 
+    icon: <HomeIcon sx={{ fontSize: 60, color: "#e91e" }} />,
     services: [
       "Gardening",
       "Nanny",
       "Nanny Services",
       "Housekeeping Services",
       "Seamstress Services",
+      "Meal Preparation",
+      "Pet Care",
+      "Dog Walking",
+      "Dog Training",
     ],
   },
   {
@@ -128,6 +174,9 @@ const categories = [
       "Videographer",
       "Photo Editing",
       "Video Editing",
+      "Photo Printing",
+      "Video Production",
+      "Photo/Video Restoration",
     ],
   },
   {
@@ -139,6 +188,13 @@ const categories = [
       "Animator Services",
       "Catering",
       "Baking and Desserts",
+      "Florist Services",
+      "Event Decoration",
+      "Event Planning",
+      "Event Management",
+      "Wedding Planning",
+      "Birthday Planning",
+      "Corporate Event Planning",
     ],
   },
 ];
@@ -163,7 +219,7 @@ const CategoriesList = () => {
               flex: "1 1 calc(25% - 20px)", // Ensures 4 equal columns
               minWidth: "250px",
               maxWidth: "300px",
-              height: "270px",
+              height: "300px",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -174,13 +230,11 @@ const CategoriesList = () => {
               transition: "0.3s",
               position: "relative",
               backgroundColor: "white", // Default background
-            
               "&:hover": {
-                transform: "scale(1.02)",
+                transform: "scale(1.0)",
                 boxShadow: "0px 0px 15px rgba(33, 150, 243, 0.6)", // Strong blue glow around the tab
               },
             }}
-            
           >
             {category.icon}
             <CardContent>
@@ -196,10 +250,48 @@ const CategoriesList = () => {
               <Typography
                 variant="body2"
                 color="textSecondary"
-                sx={{ wordWrap: "break-word" }}
+                sx={{ wordWrap: "break-word", mb: 2 }}
               >
                 {category.services.join(", ")}
               </Typography>
+              <Link
+                href={`/services/${category.name
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
+                passHref
+              >
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    position: "absolute",
+                    bottom: "15px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    backgroundColor: "#F5F5F5", // Very light blue background
+                    color: "#73777B", // Dark blue text for contrast
+                    fontSize: "0.8rem",
+                    fontWeight: "bold",
+                    textTransform: "none",
+                    borderRadius: "20px",
+                    padding: "4px 9px",
+                    // boxShadow: "0px 3px 10px rgba(33, 150, 243, 0.4)", // Soft blue glow
+                    transition: "0.3s",
+
+                    "&:hover": {
+                      backgroundColor: "#BBDEFB", // Slightly darker light blue on hover
+                      boxShadow: "0px 5px 15px rgba(33, 150, 243, 0.6)", // Stronger glow
+                    },
+
+                    "&:active": {
+                      backgroundColor: "#90CAF9", // More saturated light blue on click
+                      boxShadow: "0px 2px 5px rgba(33, 150, 243, 0.3)", // Reduced glow on press
+                    },
+                  }}
+                >
+                  View More
+                </Button>
+              </Link>
             </CardContent>
           </Card>
         ))}
