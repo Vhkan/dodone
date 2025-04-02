@@ -163,20 +163,24 @@ const CategoriesList = () => {
               flex: "1 1 calc(25% - 20px)", // Ensures 4 equal columns
               minWidth: "250px",
               maxWidth: "300px",
-              height: "270px", // Increased height for better spacing
+              height: "270px",
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
               textAlign: "center",
               p: 3,
-              boxShadow: 4,
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Subtle default shadow
               borderRadius: 3,
               transition: "0.3s",
+              position: "relative",
+              backgroundColor: "white", // Default background
+            
               "&:hover": {
-                boxShadow: 7,
-                transform: "scale(1.05)",
+                transform: "scale(1.02)",
+                boxShadow: "0px 0px 15px rgba(33, 150, 243, 0.6)", // Strong blue glow around the tab
               },
             }}
+            
           >
             {category.icon}
             <CardContent>
