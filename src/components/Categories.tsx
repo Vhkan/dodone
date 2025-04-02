@@ -11,6 +11,9 @@ import DirectionsCarIcon from "@mui/icons-material/DirectionsCar";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import SpaIcon from "@mui/icons-material/Spa";
 import LaptopMacIcon from "@mui/icons-material/LaptopMac";
+import HomeIcon from "@mui/icons-material/Home";
+import CameraAltIcon from "@mui/icons-material/CameraAlt";
+import CelebrationIcon from "@mui/icons-material/Celebration";
 
 const categories = [
   {
@@ -105,30 +108,44 @@ const categories = [
       "Eyebrow Care",
     ],
   },
+  {
+    name: "Household Services",
+    icon: <HomeIcon sx={{ fontSize: 60, color: "#e91e" }} />, 
+    services: [
+      "Gardening",
+      "Nanny",
+      "Nanny Services",
+      "Housekeeping Services",
+      "Seamstress Services",
+    ],
+  },
+  {
+    name: "Photo and Video Services",
+    icon: <CameraAltIcon sx={{ fontSize: 60, color: "#ff9800" }} />,
+    services: [
+      "Photo and Video Services",
+      "Photographer",
+      "Videographer",
+      "Photo Editing",
+      "Video Editing",
+    ],
+  },
+  {
+    name: "Party Organization",
+    icon: <CelebrationIcon sx={{ fontSize: 60, color: "#4caf50" }} />,
+    services: [
+      "Host Services",
+      "Musical Accompaniment",
+      "Animator Services",
+      "Catering",
+      "Baking and Desserts",
+    ],
+  },
 ];
 
 const CategoriesList = () => {
   return (
     <Box sx={{ width: "100%", py: 5, textAlign: "center" }}>
-      <Typography
-        variant="h5"
-        fontWeight="bold"
-        sx={{
-          mb: 5,
-          textAlign: "center",
-          color: "#333",
-          backgroundColor: "#f5f5f5",
-          padding: "12px 24px",
-          boxShadow: "0 0 8px rgba(173, 216, 230, 0.3)", // Lighter blue shadow
-          textTransform: "uppercase",
-          position: "relative",
-          top: "-30px",
-          borderRadius: "50px",
-        }}
-      >
-        Service Categories
-      </Typography>
-
       <Box
         sx={{
           display: "flex",
