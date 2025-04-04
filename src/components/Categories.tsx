@@ -2,7 +2,6 @@
 
 import { Box, Card, Button, CardContent, Typography } from "@mui/material";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
-import BuildIcon from "@mui/icons-material/Build";
 import ImagesearchRollerIcon from '@mui/icons-material/ImagesearchRoller';
 import ConstructionIcon from "@mui/icons-material/Construction";
 import WeekendIcon from "@mui/icons-material/Weekend";
@@ -275,12 +274,11 @@ const CategoriesList = () => {
                     textTransform: "none",
                     borderRadius: "20px",
                     padding: "4px 9px",
-                    // boxShadow: "0px 3px 10px rgba(33, 150, 243, 0.4)", // Soft blue glow
                     transition: "0.3s",
 
                     "&:hover": {
-                      backgroundColor: "#BBDEFB", // Slightly darker light blue on hover
-                      boxShadow: "0px 5px 15px rgba(33, 150, 243, 0.6)", // Stronger glow
+                      backgroundColor: "#F1F6F9", // Slightly darker light blue on hover
+                      boxShadow: "0px 3px 10px rgba(33, 150, 243, 0.3)", // Very subtle glow
                     },
 
                     "&:active": {
