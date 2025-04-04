@@ -151,7 +151,7 @@ const categories = [
   },
   {
     name: "Household Services",
-    icon: <HomeIcon sx={{ fontSize: 60, color: "#e91e" }} />,
+    icon: <HomeIcon sx={{ fontSize: 60, color: "#3E54AC" }} />,
     services: [
       "Gardening",
       "Nanny",
