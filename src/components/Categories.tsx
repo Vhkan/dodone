@@ -69,7 +69,7 @@ const categories = [
   },
   {
     name: "Furniture Services",
-    icon: <WeekendIcon sx={{ fontSize: 60, color: "#F5A25D" }} />,
+    icon: <WeekendIcon sx={{ fontSize: 60, color: "#562B08" }} />,
     services: [
       "Furniture Manufacturing",
       "Furniture Repair",
@@ -84,7 +84,7 @@ const categories = [
   },
   {
     name: "Cleaning Services",
-    icon: <CleaningServicesIcon sx={{ fontSize: 60, color: "#009688" }} />,
+    icon: <CleaningServicesIcon sx={{ fontSize: 60, color: "#8FD14F" }} />,
     services: [
       "Home Cleaning",
       "General Cleaning",
@@ -120,7 +120,7 @@ const categories = [
   },
   {
     name: "Transport & Warehousing",
-    icon: <LocalShippingIcon sx={{ fontSize: 60, color: "#607d8b" }} />,
+    icon: <LocalShippingIcon sx={{ fontSize: 60, color: "#0002A1" }} />,
     services: [
       "Freight Transportation",
       "Loader Services",
@@ -135,7 +135,7 @@ const categories = [
   },
   {
     name: "Beauty & Health Services",
-    icon: <SpaIcon sx={{ fontSize: 60, color: "#e91e63" }} />,
+    icon: <SpaIcon sx={{ fontSize: 60, color: "#82C3EC" }} />,
     services: [
       "Massage",
       "Nail Care",
@@ -166,7 +166,7 @@ const categories = [
   },
   {
     name: "Photo and Video Services",
-    icon: <CameraAltIcon sx={{ fontSize: 60, color: "#ff9800" }} />,
+    icon: <CameraAltIcon sx={{ fontSize: 60, color: "#295F98" }} />,
     services: [
       "Photo and Video Services",
       "Photographer",
@@ -180,7 +180,7 @@ const categories = [
   },
   {
     name: "Party Organization",
-    icon: <CelebrationIcon sx={{ fontSize: 60, color: "#4caf50" }} />,
+    icon: <CelebrationIcon sx={{ fontSize: 60, color: "#F45905" }} />,
     services: [
       "Host Services",
       "Musical Accompaniment",
