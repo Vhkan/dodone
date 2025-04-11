@@ -170,7 +170,7 @@ const Header = () => {
     <AppBar
       position="static"
       sx={{
-        background: "linear-gradient(to bottom, #B0B0B0, #FFFFFF)",
+        background: "linear-gradient(to right, #E5E1DA, #FFFFFF)",
         boxShadow: 2,
       }}
     >
@@ -179,7 +179,7 @@ const Header = () => {
         <img
           src="/doDone1.jpg"
           alt="doDone Logo"
-          style={{ height: 65, width: "auto", marginLeft: "-1.5em" }}
+          style={{ height: 70, width: "auto", marginLeft: "-1.5em" }}
         />
         <Typography variant="h6" sx={{ fontWeight: "bold", color: "black" }}>
           {/* <Link href="/" style={{ textDecoration: "none", color: "green" }}>DoDone</Link> */}
@@ -226,7 +226,7 @@ const Header = () => {
           <Button
             variant="contained"
             sx={{
-              background: "linear-gradient(45deg, #00c6ff, #0072ff)",
+              background: "linear-gradient(to bottom, #00c6ff, #0072ff)", // Top to bottom gradient
               color: "white",
               padding: "10px 19px",
               borderRadius: "2em",
@@ -237,9 +237,9 @@ const Header = () => {
               transition:
                 "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
               "&:hover": {
-                background: "linear-gradient(45deg, #0072ff, #00c6ff)",
+                background: "linear-gradient(to bottom, #3399ff, #0072ff)", // Subtle hover gradient
                 boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                transform: "scale(1.02)",
+                // transform: "scale(1.01)",
               },
               "&:focus": {
                 outline: "none",
@@ -456,19 +456,20 @@ const Header = () => {
           <Button
             variant="contained"
             sx={{
-              background: "linear-gradient(45deg, #00c6ff, #0072ff)",
+              background: "linear-gradient(to bottom, #00c6ff, #0072ff)", // Top to bottom gradient
               color: "white",
               padding: "10px 19px",
               borderRadius: "2em",
               textTransform: "none",
-              marginLeft: "9em",
+              marginLeft: "5em",
               fontWeight: "bold",
               boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              transition: "all 0.3s ease",
+              transition:
+                "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
               "&:hover": {
-                background: "linear-gradient(45deg, #0072ff, #00c6ff)",
+                background: "linear-gradient(to bottom, #3399ff, #0072ff)", // Subtle hover gradient
                 boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                transform: "scale(1.02)",
+                // transform: "scale(1.02)",
               },
               "&:focus": {
                 outline: "none",
