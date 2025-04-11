@@ -168,18 +168,19 @@ const Header = () => {
 
   return (
     <AppBar
-      position="static"
+      position="fixed"
       sx={{
-        background: "linear-gradient(to right, #E5E1DA, #FFFFFF)",
+        background:
+          "linear-gradient(to right, #FFFFFF 0%, #f9f9f9 20%, #f0f0f0 80%, #f0f0f0 100%)",
         boxShadow: 2,
       }}
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
         {/* Logo and Title */}
         <img
-          src="/doDone1.jpg"
+          src="/doDoneLogo2.png"
           alt="doDone Logo"
-          style={{ height: 70, width: "auto", marginLeft: "-1.5em" }}
+          style={{ height: 85, width: "auto", marginLeft: "-1.5em" }}
         />
         <Typography variant="h6" sx={{ fontWeight: "bold", color: "black" }}>
           {/* <Link href="/" style={{ textDecoration: "none", color: "green" }}>DoDone</Link> */}
@@ -223,32 +224,34 @@ const Header = () => {
             Categories
           </Button>
 
-          <Button
-            variant="contained"
-            sx={{
-              background: "linear-gradient(to bottom, #00c6ff, #0072ff)", // Top to bottom gradient
-              color: "white",
-              padding: "10px 19px",
-              borderRadius: "2em",
-              textTransform: "none",
-              marginLeft: "5em",
-              fontWeight: "bold",
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              transition:
-                "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
-              "&:hover": {
-                background: "linear-gradient(to bottom, #3399ff, #0072ff)", // Subtle hover gradient
-                boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                // transform: "scale(1.01)",
-              },
-              "&:focus": {
-                outline: "none",
-                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
-              },
-            }}
-          >
-            Request a Service
-          </Button>
+          <Link href="/request-service" passHref>
+            <Button
+              variant="contained"
+              sx={{
+                background: "linear-gradient(to bottom, #00c6ff, #0072ff)", // Top to bottom gradient
+                color: "white",
+                padding: "10px 19px",
+                borderRadius: "2em",
+                textTransform: "none",
+                marginLeft: "5em",
+                fontWeight: "bold",
+                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                transition:
+                  "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
+                "&:hover": {
+                  background: "linear-gradient(to bottom, #3399ff, #0072ff)", // Subtle hover gradient
+                  boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+                  // transform: "scale(1.01)",
+                },
+                "&:focus": {
+                  outline: "none",
+                  boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
+                },
+              }}
+            >
+              Request a Service
+            </Button>
+          </Link>
 
           {/* Main Categories Menu */}
           <Menu

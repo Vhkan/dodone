@@ -200,7 +200,7 @@ const categories = [
 
 const CategoriesList = () => {
   return (
-    <Box sx={{ width: "100%", py: 5, textAlign: "center" }}>
+    <Box sx={{ width: "100%", py: 5, textAlign: "center", marginTop: "7em" }}>
       <Box
         sx={{
           display: "flex",
