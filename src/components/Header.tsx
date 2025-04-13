@@ -11,6 +11,7 @@ import {
   MenuItem,
   TextField,
   IconButton,
+  Box,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -176,15 +177,16 @@ const Header = () => {
       }}
     >
       <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
-        {/* Logo and Title */}
-        <img
-          src="/doDoneLogo2.png"
-          alt="doDone Logo"
-          style={{ height: 85, width: "auto", marginLeft: "-1.5em" }}
-        />
-        <Typography variant="h6" sx={{ fontWeight: "bold", color: "black" }}>
-          {/* <Link href="/" style={{ textDecoration: "none", color: "green" }}>DoDone</Link> */}
-        </Typography>
+        {/* Logo with home page link */}
+        <Box sx={{ height: 85, marginLeft: "-1.5em" }}>
+          <Link href="/" passHref style={{ display: "block", height: "100%" }}>
+            <img
+              src="/doDoneLogo2.png"
+              alt="doDone Logo"
+              style={{ height: "100%", width: "auto", cursor: "pointer" }}
+            />
+          </Link>
+        </Box>
         {/* Categories Dropdown */}
         <div
           style={{

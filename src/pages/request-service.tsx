@@ -7,13 +7,18 @@ import {
   Box,
   Alert,
 } from "@mui/material";
+import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Header from "../components/Header";
 
 const RequestServicePage: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
+    service: "",
     details: "",
+    selectedDate: null as Date | null,
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -25,6 +30,13 @@ const RequestServicePage: React.FC = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: value,
+    }));
+  };
+
+  const handleDateChange = (date: Date | null) => {
+    setFormData((prev) => ({
+      ...prev,
+      selectedDate: date,
     }));
   };
 
@@ -45,12 +57,12 @@ const RequestServicePage: React.FC = () => {
       }}
     >
       <Box sx={{ width: "100%", margin: 0, padding: 0 }}>
-        <Header /> {/* Header placed at the top of the page */}
+        <Header />
       </Box>
 
       <Container maxWidth="sm" sx={{ mt: 15 }}>
-        <Typography variant="h4" gutterBottom>
-          Request a Service
+        <Typography variant="h5" gutterBottom>
+          Create a Service Request
         </Typography>
 
         {submitted && (
@@ -64,34 +76,36 @@ const RequestServicePage: React.FC = () => {
           onSubmit={handleSubmit}
           noValidate
           autoComplete="off"
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: 1, // controls vertical spacing between fields
+          }}
         >
           {/* Name Input */}
           <TextField
             fullWidth
-            margin="normal"
+            margin="dense"
             label="Your Name"
             name="name"
             value={formData.name}
             onChange={handleChange}
             required
             sx={{
-              borderRadius: "8px",
               "& .MuiOutlinedInput-root": {
-                borderRadius: "30px", // Rounded corners for input
+                borderRadius: "30px",
+                padding: "2px",
+                height: "40px", // set a fixed height for input
               },
-              "& .MuiInputLabel-root": {
-                fontSize: "1rem", // Adjust label size
-              },
-              "& .MuiInputBase-root": {
-                padding: "3px", // Add padding inside the input field
-              },
+              "& .MuiInputLabel-root": { fontSize: "1rem" },
             }}
           />
 
           {/* Email Input */}
           <TextField
             fullWidth
-            margin="normal"
+            margin="dense"
             label="Email"
             name="email"
             type="email"
@@ -99,91 +113,130 @@ const RequestServicePage: React.FC = () => {
             onChange={handleChange}
             required
             sx={{
-              borderRadius: "8px",
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
+                padding: "2px",
+                height: "40px", // set a fixed height for input
               },
-              "& .MuiInputLabel-root": {
-                fontSize: "1rem",
-              },
-              "& .MuiInputBase-root": {
-                padding: "3px",
-              },
+              "& .MuiInputLabel-root": { fontSize: "1rem" },
             }}
           />
 
           {/* Phone Input */}
           <TextField
             fullWidth
-            margin="normal"
+            margin="dense"
             label="Phone Number"
             name="phone"
-            type="phone"
-            value={formData.email}
+            type="tel"
+            value={formData.phone}
             onChange={handleChange}
             required
             sx={{
-              borderRadius: "8px",
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
+                padding: "2px",
+                height: "40px", // set a fixed height for input
               },
-              "& .MuiInputLabel-root": {
-                fontSize: "1rem",
-              },
-              "& .MuiInputBase-root": {
-                padding: "3px",
-              },
+              "& .MuiInputLabel-root": { fontSize: "1rem" },
             }}
           />
 
-          {/* Service Details Input */}
+          {/* Service Selection */}
+          <TextField
+            select
+            fullWidth
+            margin="dense"
+            label="Select Service"
+            name="service"
+            value={formData.service}
+            onChange={handleChange}
+            required
+            SelectProps={{
+              native: true,
+            }}
+            sx={{
+              "& .MuiOutlinedInput-root": {
+                borderRadius: "30px",
+                padding: "2px",
+                height: "40px", // set a fixed height for input
+              },
+              "& .MuiInputLabel-root": { fontSize: "1rem" },
+            }}
+          >
+            <option value=""></option>
+            <option value="repair">Repair</option>
+            <option value="installation">Installation</option>
+            <option value="maintenance">Maintenance</option>
+          </TextField>
+
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+  <DatePicker
+    label="Select Date"
+    value={formData.selectedDate}
+    onChange={handleDateChange}
+    slotProps={{
+      textField: {
+        fullWidth: true,
+        margin: "dense",
+        required: true,
+        sx: {
+          "& .MuiOutlinedInput-root": {
+            borderRadius: "30px",
+            padding: "2px",
+            height: "40px",
+          },
+          "& .MuiInputLabel-root": { fontSize: "1rem" },
+          "& input": {
+            paddingTop: "0px",
+            paddingBottom: "0px",
+            height: "100%",
+            textAlign: "center",
+          },
+          "& .MuiInputAdornment-root": {
+            marginLeft: "0px",
+            position: "absolute",
+            right: "1em"
+          }
+        }
+      }
+    }}
+  />
+</LocalizationProvider>
+
+          {/* Service Details */}
           <TextField
             fullWidth
-            margin="normal"
+            margin="dense"
             label="Service Details"
             name="details"
             multiline
-            rows={4}
+            rows={3} // reduced from 4 to 3
             value={formData.details}
             onChange={handleChange}
             required
             sx={{
-              borderRadius: "8px",
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
+                padding: "4px",
+                height: "90px", // set a fixed height for multiline input
               },
-              "& .MuiInputLabel-root": {
-                fontSize: "1rem",
-              },
-              "& .MuiInputBase-root": {
-                padding: "10px",
-              },
+              "& .MuiInputLabel-root": { fontSize: "1rem" },
             }}
           />
 
           {/* Submit Button */}
           <Button
+            type="submit"
             variant="contained"
             sx={{
-              background: "linear-gradient(to bottom, #00c6ff, #0072ff)", // Top to bottom gradient
+              background: "linear-gradient(to bottom, #00c6ff, #0072ff)",
               color: "white",
-              padding: "10px 19px",
+              padding: "6px 16px", // reduced vertical padding
               borderRadius: "2em",
               textTransform: "none",
-              marginTop: "1em",
+              marginTop: "0.5em", // reduced margin
               fontWeight: "bold",
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              transition:
-                "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
-              "&:hover": {
-                background: "linear-gradient(to bottom, #3399ff, #0072ff)", // Subtle hover gradient
-                boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                // transform: "scale(1.02)",
-              },
-              "&:focus": {
-                outline: "none",
-                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
-              },
             }}
           >
             Submit Request
