@@ -364,7 +364,7 @@ const Header = () => {
             border: "1px solid #ccc",
             borderRadius: "1.5em",
             padding: "4px 8px",
-            marginRight: "12em",
+            marginRight: "10em",
             minWidth: "200px",
             maxWidth: "300px",
             width: "100%", // Ensures it stretches properly
