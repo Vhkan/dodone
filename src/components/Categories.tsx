@@ -2,7 +2,7 @@
 
 import { Box, Card, Button, CardContent, Typography } from "@mui/material";
 import HomeRepairServiceIcon from "@mui/icons-material/HomeRepairService";
-import ImagesearchRollerIcon from '@mui/icons-material/ImagesearchRoller';
+import ImagesearchRollerIcon from "@mui/icons-material/ImagesearchRoller";
 import ConstructionIcon from "@mui/icons-material/Construction";
 import WeekendIcon from "@mui/icons-material/Weekend";
 import CleaningServicesIcon from "@mui/icons-material/CleaningServices";
@@ -15,11 +15,19 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import CelebrationIcon from "@mui/icons-material/Celebration";
 import Link from "next/link";
 
-const categories = [
+export const categories = [
   {
     name: "Home Specialist",
     icon: <HomeRepairServiceIcon sx={{ fontSize: 60, color: "#ff9800" }} />,
-    services: ["Plumber", "Electrician", "Carpenter", "Man for an Hour", "Locksmith", "Glazier", "Handyman"],
+    services: [
+      "Plumber",
+      "Electrician",
+      "Carpenter",
+      "Man for an Hour",
+      "Locksmith",
+      "Glazier",
+      "Handyman",
+    ],
   },
   {
     name: "Appliance Technician",
@@ -213,111 +221,115 @@ const CategoriesList = () => {
       >
         {categories.map((category, index) => (
           <Card
-  key={index}
-  sx={{
-    flex: "1 1 calc(25% - 20px)", // Ensures 4 equal columns
-    minWidth: "250px",
-    maxWidth: "300px",
-    height: "300px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    textAlign: "center",
-    p: 3,
-    boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Subtle default shadow
-    borderRadius: 3,
-    transition: "0.3s",
-    position: "relative",
-    backgroundColor: "white", // Default background
-    overflow: "hidden", // Important for containing the overlay
-    "&:hover": {
-      transform: "scale(1.0)",
-      boxShadow: "0px 0px 15px rgba(33, 150, 243, 0.6)", // Strong blue glow around the tab
-    },
-    // Apply overlay gradient for cards with many items
-    "&::after": category.services.length > 5 ? {
-      content: '""',
-      position: "absolute",
-      bottom: 0,
-      left: 0,
-      width: "100%",
-      height: "40%", // Increased height for more blur coverage
-      background: "linear-gradient(transparent, rgba(255, 255, 255, 0.8) 20%, rgba(255, 255, 255, 0.98) 70%)",
-      pointerEvents: "none", // Ensures clicks pass through
-      zIndex: 1, // Ensures the gradient appears above content but below the button
-    } : {},
-  }}
->
-  {category.icon}
-  <CardContent>
-    <Typography
-      variant="h6"
-      fontWeight="bold"
-      sx={{
-        fontSize: "1.25rem", // Consistent font size for all category names
-        overflow: "hidden",
-        textOverflow: "ellipsis",
-        display: "-webkit-box",
-        WebkitLineClamp: 2, // Limits text to 2 lines
-        WebkitBoxOrient: "vertical",
-        lineHeight: "1.2em",
-        height: "2.4em" // Allows for 2 lines of text at 1.2em line height
-      }}
-    >
-      {category.name}
-    </Typography>
-    <Typography
-      variant="body2"
-      color="textSecondary"
-      sx={{ 
-        wordWrap: "break-word", 
-        mb: 2,
-        maxHeight: "120px", // Limit height to ensure some content is cut off
-        overflow: "hidden"
-      }}
-    >
-      {category.services.join(", ")}
-    </Typography>
-    <Link
-      href={`/services/${category.name
-        .toLowerCase()
-        .replace(/\s+/g, "-")}`}
-      passHref
-    >
-      <Button
-        variant="contained"
-        size="small"
-        sx={{
-          position: "absolute",
-          bottom: "15px",
-          left: "50%",
-          transform: "translateX(-50%)",
-          backgroundColor: "#F5F5F5", // Very light blue background
-          color: "#73777B", // Dark blue text for contrast
-          fontSize: "0.8rem",
-          fontWeight: "bold",
-          textTransform: "none",
-          borderRadius: "20px",
-          padding: "4px 9px",
-          transition: "0.3s",
-          zIndex: 2, // Ensure button appears above gradient
+            key={index}
+            sx={{
+              flex: "1 1 calc(25% - 20px)", // Ensures 4 equal columns
+              minWidth: "250px",
+              maxWidth: "300px",
+              height: "300px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+              p: 3,
+              boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)", // Subtle default shadow
+              borderRadius: 3,
+              transition: "0.3s",
+              position: "relative",
+              backgroundColor: "white", // Default background
+              overflow: "hidden", // Important for containing the overlay
+              "&:hover": {
+                transform: "scale(1.0)",
+                boxShadow: "0px 0px 15px rgba(33, 150, 243, 0.6)", // Strong blue glow around the tab
+              },
+              // Apply overlay gradient for cards with many items
+              "&::after":
+                category.services.length > 5
+                  ? {
+                      content: '""',
+                      position: "absolute",
+                      bottom: 0,
+                      left: 0,
+                      width: "100%",
+                      height: "40%", // Increased height for more blur coverage
+                      background:
+                        "linear-gradient(transparent, rgba(255, 255, 255, 0.8) 20%, rgba(255, 255, 255, 0.98) 70%)",
+                      pointerEvents: "none", // Ensures clicks pass through
+                      zIndex: 1, // Ensures the gradient appears above content but below the button
+                    }
+                  : {},
+            }}
+          >
+            {category.icon}
+            <CardContent>
+              <Typography
+                variant="h6"
+                fontWeight="bold"
+                sx={{
+                  fontSize: "1.25rem", // Consistent font size for all category names
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2, // Limits text to 2 lines
+                  WebkitBoxOrient: "vertical",
+                  lineHeight: "1.2em",
+                  height: "2.4em", // Allows for 2 lines of text at 1.2em line height
+                }}
+              >
+                {category.name}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                sx={{
+                  wordWrap: "break-word",
+                  mb: 2,
+                  maxHeight: "120px", // Limit height to ensure some content is cut off
+                  overflow: "hidden",
+                }}
+              >
+                {category.services.join(", ")}
+              </Typography>
+              <Link
+                href={`/services/${category.name
+                  .toLowerCase()
+                  .replace(/\s+/g, "-")}`}
+                passHref
+              >
+                <Button
+                  variant="contained"
+                  size="small"
+                  sx={{
+                    position: "absolute",
+                    bottom: "15px",
+                    left: "50%",
+                    transform: "translateX(-50%)",
+                    backgroundColor: "#F5F5F5", // Very light blue background
+                    color: "#73777B", // Dark blue text for contrast
+                    fontSize: "0.8rem",
+                    fontWeight: "bold",
+                    textTransform: "none",
+                    borderRadius: "20px",
+                    padding: "4px 9px",
+                    transition: "0.3s",
+                    zIndex: 2, // Ensure button appears above gradient
 
-          "&:hover": {
-            backgroundColor: "#F1F6F9", // Slightly darker light blue on hover
-            boxShadow: "0px 3px 10px rgba(33, 150, 243, 0.3)", // Very subtle glow
-          },
+                    "&:hover": {
+                      backgroundColor: "#F1F6F9", // Slightly darker light blue on hover
+                      boxShadow: "0px 3px 10px rgba(33, 150, 243, 0.3)", // Very subtle glow
+                    },
 
-          "&:active": {
-            backgroundColor: "#90CAF9", // More saturated light blue on click
-            boxShadow: "0px 2px 5px rgba(33, 150, 243, 0.3)", // Reduced glow on press
-          },
-        }}
-      >
-        View More
-      </Button>
-    </Link>
-  </CardContent>
-</Card>
+                    "&:active": {
+                      backgroundColor: "#90CAF9", // More saturated light blue on click
+                      boxShadow: "0px 2px 5px rgba(33, 150, 243, 0.3)", // Reduced glow on press
+                    },
+                  }}
+                >
+                  View More
+                </Button>
+              </Link>
+            </CardContent>
+          </Card>
         ))}
       </Box>
     </Box>
