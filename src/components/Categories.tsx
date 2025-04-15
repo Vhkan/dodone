@@ -241,7 +241,14 @@ const CategoriesList = () => {
                 variant="h6"
                 fontWeight="bold"
                 sx={{
-                  fontSize: category.name.length > 20 ? "1rem" : "1.25rem",
+                  fontSize: "1.25rem", // Consistent font size for all category names
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  display: "-webkit-box",
+                  WebkitLineClamp: 2, // Limits text to 2 lines
+                  WebkitBoxOrient: "vertical",
+                  lineHeight: "1.2em",
+                  height: "2.4em" // Allows for 2 lines of text at 1.2em line height
                 }}
               >
                 {category.name}
