@@ -291,11 +291,7 @@ const CategoriesList = () => {
                 {category.services.join(", ")}
               </Typography>
               <Link
-                href={`/services/${category.name
-                  .toLowerCase()
-                  .replace(/\s+/g, "-")}`}
-                passHref
-              >
+                href={`/services/${category.name.toLowerCase().replace(/\s+/g, "-")}`}passHref>
                 <Button
                   variant="contained"
                   size="small"
