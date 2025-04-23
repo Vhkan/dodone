@@ -19,7 +19,7 @@ const CategoryDetail = () => {
         </Box>
       </>
     );
-  }
+  };
 
   // Handle case where category might be an array
   const categorySlug = Array.isArray(category) ? category[0] : category;
@@ -53,7 +53,7 @@ const CategoryDetail = () => {
         </Box>
       </>
     );
-  }
+  };
 
   return (
     <>

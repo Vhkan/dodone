@@ -18,7 +18,7 @@ import Link from "next/link";
 export const categories = [
   {
     name: "Home Specialist",
-    icon: <HomeRepairServiceIcon sx={{ fontSize: 60, color: "#ff9800" }} />,
+    icon: <HomeRepairServiceIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Plumber",
       "Electrician",
@@ -31,7 +31,7 @@ export const categories = [
   },
   {
     name: "Appliance Technician",
-    icon: <LaptopMacIcon sx={{ fontSize: 60, color: "#3f51b5" }} />,
+    icon: <LaptopMacIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Major Appliance Repair",
       "Small Appliance Repair",
@@ -42,7 +42,7 @@ export const categories = [
   },
   {
     name: "Finishing Work",
-    icon: <ImagesearchRollerIcon sx={{ fontSize: 60, color: "#8bc34a" }} />,
+    icon: <ImagesearchRollerIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Home Renovation",
       "Tile Laying",
@@ -61,7 +61,7 @@ export const categories = [
   },
   {
     name: "Construction Work",
-    icon: <ConstructionIcon sx={{ fontSize: 60, color: "#f44336" }} />,
+    icon: <ConstructionIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Handyman",
       "Welding Work",
@@ -77,7 +77,7 @@ export const categories = [
   },
   {
     name: "Furniture Services",
-    icon: <WeekendIcon sx={{ fontSize: 60, color: "#562B08" }} />,
+    icon: <WeekendIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Furniture Manufacturing",
       "Furniture Repair",
@@ -92,7 +92,7 @@ export const categories = [
   },
   {
     name: "Cleaning Services",
-    icon: <CleaningServicesIcon sx={{ fontSize: 60, color: "#8FD14F" }} />,
+    icon: <CleaningServicesIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Home Cleaning",
       "General Cleaning",
@@ -108,7 +108,7 @@ export const categories = [
   },
   {
     name: "Auto Repair",
-    icon: <DirectionsCarIcon sx={{ fontSize: 60, color: "#2196f3" }} />,
+    icon: <DirectionsCarIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Roadside Assistance",
       "Maintenance & Diagnostics",
@@ -128,7 +128,7 @@ export const categories = [
   },
   {
     name: "Transport & Warehousing",
-    icon: <LocalShippingIcon sx={{ fontSize: 60, color: "#0002A1" }} />,
+    icon: <LocalShippingIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Freight Transportation",
       "Loader Services",
@@ -143,7 +143,7 @@ export const categories = [
   },
   {
     name: "Beauty & Health Services",
-    icon: <SpaIcon sx={{ fontSize: 60, color: "#82C3EC" }} />,
+    icon: <SpaIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Massage",
       "Nail Care",
@@ -159,7 +159,7 @@ export const categories = [
   },
   {
     name: "Household Services",
-    icon: <HomeIcon sx={{ fontSize: 60, color: "#3E54AC" }} />,
+    icon: <HomeIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Gardening",
       "Nanny",
@@ -174,7 +174,7 @@ export const categories = [
   },
   {
     name: "Photo and Video Services",
-    icon: <CameraAltIcon sx={{ fontSize: 60, color: "#295F98" }} />,
+    icon: <CameraAltIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Photo and Video Services",
       "Photographer",
@@ -188,7 +188,7 @@ export const categories = [
   },
   {
     name: "Party Organization",
-    icon: <CelebrationIcon sx={{ fontSize: 60, color: "#F45905" }} />,
+    icon: <CelebrationIcon sx={{ fontSize: 60, color: "#0F67B1" }} />,
     services: [
       "Host Services",
       "Musical Accompaniment",
