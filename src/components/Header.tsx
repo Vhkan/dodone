@@ -5,18 +5,27 @@ import Link from "next/link";
 import {
   AppBar,
   Toolbar,
-  Typography,
   Button,
   Menu,
   MenuItem,
   TextField,
   IconButton,
   Box,
+  useMediaQuery,
+  useTheme,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  Collapse,
 } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MenuIcon from "@mui/icons-material/Menu";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import LanguageIcon from "@mui/icons-material/Language";
+import ExpandLess from "@mui/icons-material/ExpandLess";
+import ExpandMore from "@mui/icons-material/ExpandMore";
+import CloseIcon from "@mui/icons-material/Close";
 
 // Types for categories
 interface Subcategory {
@@ -86,6 +95,27 @@ const categories: Subcategory[] = [
 ];
 
 const Header = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isTablet = useMediaQuery(theme.breakpoints.between("md", "lg"));
+
+  // Mobile drawer state
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [openCategories, setOpenCategories] = useState<string[]>([]);
+
+  const toggleDrawer = (open: boolean) => {
+    setMobileDrawerOpen(open);
+  };
+
+  const toggleCategory = (categoryName: string) => {
+    if (openCategories.includes(categoryName)) {
+      setOpenCategories(openCategories.filter((name) => name !== categoryName));
+    } else {
+      setOpenCategories([...openCategories, categoryName]);
+    }
+  };
+
+  // Desktop menu states
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [subAnchorEl, setSubAnchorEl] = useState<null | HTMLElement>(null);
   const [selectedCategory, setSelectedCategory] = useState<Subcategory | null>(
@@ -146,7 +176,7 @@ const Header = () => {
     setSelectedMainCategory(null);
   };
 
-  //Language Menu
+  // Language Menu
   const [languageAnchorEl, setLanguageAnchorEl] = useState<null | HTMLElement>(
     null
   );
@@ -167,6 +197,100 @@ const Header = () => {
     setLanguageAnchorEl(null);
   };
 
+  // Mobile drawer content
+  const mobileDrawerContent = (
+    <Box sx={{ width: 280, paddingTop: 2 }}>
+      <Box sx={{ display: "flex", justifyContent: "flex-end", px: 2 }}>
+        <IconButton onClick={() => toggleDrawer(false)}>
+          <CloseIcon />
+        </IconButton>
+      </Box>
+
+      <List>
+        {categories.map((category) => (
+          <Box key={category.name}>
+            <ListItem
+              component="button"
+              onClick={() => toggleCategory(category.name)}
+              sx={{ textAlign: "left" }}
+            >
+              <ListItemText primary={category.name} />
+              {openCategories.includes(category.name) ? (
+                <ExpandLess />
+              ) : (
+                <ExpandMore />
+              )}
+            </ListItem>
+
+            <Collapse
+              in={openCategories.includes(category.name)}
+              timeout="auto"
+              unmountOnExit
+            >
+              <List component="div" disablePadding>
+                {category.subcategories?.map((subcategory) => (
+                  <Box key={subcategory.name}>
+                    <ListItem
+                      component="button"
+                      sx={{ pl: 4, textAlign: "left" }}
+                    >
+                      <ListItemText primary={subcategory.name} />
+                    </ListItem>
+                  </Box>
+                ))}
+              </List>
+            </Collapse>
+          </Box>
+        ))}
+      </List>
+      
+      {/* Serch field */}
+      <Box sx={{ px: 2, mt: 2 }}>
+        <TextField
+          fullWidth
+          variant="outlined"
+          size="small"
+          placeholder="Find a specialist..."
+          InputProps={{
+            endAdornment: (
+              <IconButton size="small">
+                <SearchIcon />
+              </IconButton>
+            ),
+          }}
+          sx={{ mb: 2 }}
+        />
+
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{
+            background: "linear-gradient(to bottom, #00c6ff, #0072ff)",
+            color: "white",
+            borderRadius: "2em",
+            textTransform: "none",
+            mb: 2,
+          }}
+        >
+          Request a Service
+        </Button>
+
+        <Button
+          fullWidth
+          variant="contained"
+          sx={{
+            background: "linear-gradient(to bottom, #00c6ff, #0072ff)",
+            color: "white",
+            borderRadius: "2em",
+            textTransform: "none",
+          }}
+        >
+          Register
+        </Button>
+      </Box>
+    </Box>
+  );
+
   return (
     <AppBar
       position="fixed"
@@ -176,9 +300,22 @@ const Header = () => {
         boxShadow: 2,
       }}
     >
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between", px: 2 }}>
+      <Toolbar
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          px: { xs: 1, sm: 2 },
+          gap: { xs: 1, sm: 2 },
+        }}
+      >
         {/* Logo with home page link */}
-        <Box sx={{ height: 85, marginLeft: "-1.5em" }}>
+        <Box
+          sx={{
+            height: { xs: 60, sm: 70, md: 85 },
+            marginLeft: { xs: 0, sm: 0, md: 0 },
+            flexShrink: 0,
+          }}
+        >
           <Link href="/" passHref style={{ display: "block", height: "100%" }}>
             <img
               src="/doDoneLogo2.png"
@@ -187,304 +324,301 @@ const Header = () => {
             />
           </Link>
         </Box>
-        {/* Categories Dropdown */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            marginRight: "auto",
-            gap: "1rem",
-          }}
-        >
-          <Button
-            aria-controls="category-menu"
-            aria-haspopup="true"
-            onClick={handleMainMenuOpen}
-            sx={{
-              background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)",
-              color: "black",
-              padding: "10px 25px",
-              marginLeft: "10em",
-              borderRadius: "2em",
-              fontWeight: "bold",
-              textTransform: "none",
-              gap: "8px",
-              boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
-              transition:
-                "background 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease",
-              "&:hover": {
-                background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)",
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)",
-              },
-              "&:focus": {
-                outline: "none",
-                boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.2)",
-              },
-            }}
-            startIcon={<MenuIcon />}
-          >
-            Categories
-          </Button>
 
-          <Link href="/request-service" passHref>
-            <Button
-              variant="contained"
+        {/* Mobile menu icon */}
+        {isMobile && (
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={() => toggleDrawer(true)}
+            sx={{ ml: "auto" }}
+          >
+            <MenuIcon />
+          </IconButton>
+        )}
+
+        {/* Desktop navigation */}
+        {!isMobile && (
+          <>
+            {/* Categories Dropdown */}
+            <Box
               sx={{
-                background: "linear-gradient(to bottom, #00c6ff, #0072ff)", // Top to bottom gradient
-                color: "white",
-                padding: "10px 19px",
-                borderRadius: "2em",
-                textTransform: "none",
-                marginLeft: "5em",
-                fontWeight: "bold",
-                boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                transition:
-                  "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
-                "&:hover": {
-                  background: "linear-gradient(to bottom, #3399ff, #0072ff)", // Subtle hover gradient
-                  boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                  // transform: "scale(1.01)",
-                },
-                "&:focus": {
-                  outline: "none",
-                  boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
-                },
+                display: "flex",
+                alignItems: "center",
+                gap: { md: 1, lg: 2 },
+                flexGrow: 0,
+                ml: { md: 1, lg: 2 },
               }}
             >
-              Request a Service
-            </Button>
-          </Link>
-
-          {/* Main Categories Menu */}
-          <Menu
-            id="category-menu"
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)}
-            onClose={handleMenuClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-          >
-            {categories.map((category) => (
-              <MenuItem
-                key={category.name}
-                onClick={() => handleMainCategorySelect(category)}
+              <Button
+                aria-controls="category-menu"
+                aria-haspopup="true"
+                onClick={handleMainMenuOpen}
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+                  background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)",
+                  color: "black",
+                  padding: { md: "8px 16px", lg: "10px 25px" },
+                  borderRadius: "2em",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  gap: "8px",
+                  boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                  whiteSpace: "nowrap",
+                  "&:hover": {
+                    background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)",
+                    boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)",
+                  },
                 }}
+                startIcon={<MenuIcon />}
               >
-                {category.name}
-                {category.subcategories &&
-                  category.subcategories.length > 0 && (
-                    <ArrowRightIcon fontSize="small" />
-                  )}
-              </MenuItem>
-            ))}
-          </Menu>
+                Categories
+              </Button>
 
-          {/* Subcategories Menu */}
-          <Menu
-            id="subcategory-menu"
-            anchorEl={subAnchorEl}
-            open={
-              Boolean(subAnchorEl) &&
-              (selectedMainCategory?.subcategories || []).length > 0
-            }
-            onClose={handleMenuClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-          >
-            {/* First level subcategories */}
-            {selectedMainCategory?.subcategories?.map((subcategory) => (
-              <MenuItem
-                key={subcategory.name}
-                onClick={() => handleCategorySelect(subcategory)}
+              {!isTablet && (
+                <Link href="/request-service" passHref>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      background:
+                        "linear-gradient(to bottom, #00c6ff, #0072ff)",
+                      color: "white",
+                      padding: { md: "8px 16px", lg: "10px 19px" },
+                      borderRadius: "2em",
+                      textTransform: "none",
+                      fontWeight: "bold",
+                      whiteSpace: "nowrap",
+                      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                      "&:hover": {
+                        background:
+                          "linear-gradient(to bottom, #3399ff, #0072ff)",
+                        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+                      },
+                    }}
+                  >
+                    Request a Service
+                  </Button>
+                </Link>
+              )}
+            </Box>
+
+            {/* Search Bar */}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                border: "1px solid #ccc",
+                borderRadius: "1.5em",
+                padding: "4px 8px",
+                flexGrow: 1,
+                mx: { md: 2, lg: 4 },
+                maxWidth: { md: 200, lg: 300 },
+              }}
+            >
+              <TextField
+                variant="standard"
+                placeholder="Find a specialist..."
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+                  flexGrow: 1,
+                  padding: "5px",
+                  "& .MuiInputBase-root": { borderBottom: "none" },
                 }}
-              >
-                {subcategory.name}
-                {subcategory.subcategories &&
-                  subcategory.subcategories.length > 0 && (
-                    <ArrowRightIcon fontSize="small" />
-                  )}
-              </MenuItem>
-            ))}
-          </Menu>
+                InputProps={{ disableUnderline: true }}
+              />
+              <IconButton size="small">
+                <SearchIcon />
+              </IconButton>
+            </Box>
 
-          {/* Third level Subcategories Menu */}
-          <Menu
-            id="third-level-subcategory-menu"
-            anchorEl={subAnchorEl}
-            open={
-              Boolean(subAnchorEl) &&
-              (selectedCategory?.subcategories || []).length > 0
-            }
-            onClose={handleMenuClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-          >
-            {/* Third level subcategories */}
-            {selectedCategory?.subcategories?.map((subcategory) => (
-              <MenuItem
-                key={subcategory.name}
-                onClick={() => handleSubcategorySelect(subcategory)}
+            {/* Language Selection */}
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                mr: { md: 1, lg: 2 },
+              }}
+            >
+              <Button
+                aria-controls="language-menu"
+                aria-haspopup="true"
+                onClick={handleLanguageMenuOpen}
+                sx={{
+                  background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)",
+                  color: "black",
+                  padding: { md: "5px 12px", lg: "7px 19px" },
+                  borderRadius: "2em",
+                  fontWeight: "bold",
+                  textTransform: "none",
+                  "&:hover": {
+                    background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)",
+                  },
+                }}
+                startIcon={<LanguageIcon />}
               >
-                {subcategory.name}
-              </MenuItem>
-            ))}
-          </Menu>
-        </div>
-        {/* Search Bar and Register Button */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            border: "1px solid #ccc",
-            borderRadius: "1.5em",
-            padding: "4px 8px",
-            marginRight: "10em",
-            minWidth: "200px",
-            maxWidth: "300px",
-            width: "100%", // Ensures it stretches properly
-            transition: "box-shadow 0.3s ease, background 0.3s ease",
+                {selectedLanguage}
+              </Button>
+            </Box>
+
+            {/* Register Button */}
+            <Box>
+              <Link href="/register" passHref>
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: "linear-gradient(to bottom, #00c6ff, #0072ff)",
+                    color: "white",
+                    padding: { md: "8px 16px", lg: "10px 19px" },
+                    borderRadius: "2em",
+                    textTransform: "none",
+                    fontWeight: "bold",
+                    whiteSpace: "nowrap",
+                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                    "&:hover": {
+                      background:
+                        "linear-gradient(to bottom, #3399ff, #0072ff)",
+                      boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+                    },
+                  }}
+                >
+                  Register
+                </Button>
+              </Link>
+            </Box>
+          </>
+        )}
+
+        {/* Main Categories Menu */}
+        <Menu
+          id="category-menu"
+          anchorEl={anchorEl}
+          open={Boolean(anchorEl)}
+          onClose={handleMenuClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
           }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background =
-              "linear-gradient(45deg, #e0e0e0, #d6d6d6)";
-            e.currentTarget.style.boxShadow = "0px 4px 8px rgba(0, 0, 0, 0.15)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "transparent";
-            e.currentTarget.style.boxShadow = "none";
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
           }}
         >
-          <TextField
-            variant="standard"
-            placeholder="Find a specialist..."
-            sx={{
-              flexGrow: 1, // Ensures it takes up available space
-              padding: "5px",
-              "& .MuiInputBase-root": { borderBottom: "none" },
-            }}
-            InputProps={{ disableUnderline: true }}
-          />
-          <IconButton>
-            <SearchIcon />
-          </IconButton>
-        </div>
+          {categories.map((category) => (
+            <MenuItem
+              key={category.name}
+              onClick={() => handleMainCategorySelect(category)}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              {category.name}
+              {category.subcategories && category.subcategories.length > 0 && (
+                <ArrowRightIcon fontSize="small" />
+              )}
+            </MenuItem>
+          ))}
+        </Menu>
+
+        {/* Subcategories Menu */}
+        <Menu
+          id="subcategory-menu"
+          anchorEl={subAnchorEl}
+          open={
+            Boolean(subAnchorEl) &&
+            (selectedMainCategory?.subcategories || []).length > 0
+          }
+          onClose={handleMenuClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+        >
+          {selectedMainCategory?.subcategories?.map((subcategory) => (
+            <MenuItem
+              key={subcategory.name}
+              onClick={() => handleCategorySelect(subcategory)}
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+              }}
+            >
+              {subcategory.name}
+              {subcategory.subcategories &&
+                subcategory.subcategories.length > 0 && (
+                  <ArrowRightIcon fontSize="small" />
+                )}
+            </MenuItem>
+          ))}
+        </Menu>
+
+        {/* Third level Subcategories Menu */}
+        <Menu
+          id="third-level-subcategory-menu"
+          anchorEl={subAnchorEl}
+          open={
+            Boolean(subAnchorEl) &&
+            (selectedCategory?.subcategories || []).length > 0
+          }
+          onClose={handleMenuClose}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
+          }}
+        >
+          {selectedCategory?.subcategories?.map((subcategory) => (
+            <MenuItem
+              key={subcategory.name}
+              onClick={() => handleSubcategorySelect(subcategory)}
+            >
+              {subcategory.name}
+            </MenuItem>
+          ))}
+        </Menu>
 
         {/* Language Menu */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "1rem",
-            width: "5em",
+        <Menu
+          id="language-menu"
+          anchorEl={languageAnchorEl}
+          open={Boolean(languageAnchorEl)}
+          onClose={handleLanguageMenuClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "left",
+          }}
+          transformOrigin={{
+            vertical: "top",
+            horizontal: "left",
           }}
         >
-          <Button
-            aria-controls="language-menu"
-            aria-haspopup="true"
-            onClick={handleLanguageMenuOpen}
-            sx={{
-              background: "linear-gradient(45deg, #f5f5f5, #e0e0e0)",
-              color: "black",
-              padding: "7px 19px",
-              borderRadius: "2em",
-              fontWeight: "bold",
-              textTransform: "none",
-              "&:hover": {
-                background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)",
-                boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)",
-              },
-              "&:focus": {
-                outline: "none",
-                boxShadow: "0px 0px 8px rgba(0, 0, 0, 0.2)",
-              },
-            }}
-            startIcon={<LanguageIcon />}
-          >
-            {selectedLanguage}
-          </Button>
+          <MenuItem onClick={() => handleLanguageSelect("ENG")}>
+            English (ENG)
+          </MenuItem>
+          <MenuItem onClick={() => handleLanguageSelect("UKR")}>
+            Українська (UKR)
+          </MenuItem>
+          <MenuItem onClick={() => handleLanguageSelect("DK")}>
+            Dansk (DK)
+          </MenuItem>
+        </Menu>
 
-          {/* Language Menu */}
-          <Menu
-            id="language-menu"
-            anchorEl={languageAnchorEl}
-            open={Boolean(languageAnchorEl)}
-            onClose={handleLanguageMenuClose}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-          >
-            <MenuItem onClick={() => handleLanguageSelect("ENG")}>
-              English (ENG)
-            </MenuItem>
-            <MenuItem onClick={() => handleLanguageSelect("UKR")}>
-              Українська (UKR)
-            </MenuItem>
-            <MenuItem onClick={() => handleLanguageSelect("DK")}>
-              Dansk (DK)
-            </MenuItem>
-          </Menu>
-        </div>
-
-        {/* Register Button */}
-        <Link href="/register" passHref>
-          <Button
-            variant="contained"
-            sx={{
-              background: "linear-gradient(to bottom, #00c6ff, #0072ff)", // Top to bottom gradient
-              color: "white",
-              padding: "10px 19px",
-              borderRadius: "2em",
-              textTransform: "none",
-              marginLeft: "5em",
-              fontWeight: "bold",
-              boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-              transition:
-                "background 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease",
-              "&:hover": {
-                background: "linear-gradient(to bottom, #3399ff, #0072ff)", // Subtle hover gradient
-                boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                // transform: "scale(1.02)",
-              },
-              "&:focus": {
-                outline: "none",
-                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
-              },
-            }}
-          >
-            Register
-          </Button>
-        </Link>
+        {/* Mobile navigation drawer */}
+        <Drawer
+          anchor="right"
+          open={mobileDrawerOpen}
+          onClose={() => toggleDrawer(false)}
+        >
+          {mobileDrawerContent}
+        </Drawer>
       </Toolbar>
     </AppBar>
   );
