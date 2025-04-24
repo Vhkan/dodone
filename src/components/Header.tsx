@@ -243,7 +243,7 @@ const Header = () => {
           </Box>
         ))}
       </List>
-      
+
       {/* Serch field */}
       <Box sx={{ px: 2, mt: 2 }}>
         <TextField
@@ -312,7 +312,7 @@ const Header = () => {
         <Box
           sx={{
             height: { xs: 60, sm: 70, md: 85 },
-            marginLeft: { xs: 0, sm: 0, md: 0 },
+            marginLeft: { xs: 0, sm: -1.5, md: -2 },
             flexShrink: 0,
           }}
         >
@@ -365,6 +365,8 @@ const Header = () => {
                   gap: "8px",
                   boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
                   whiteSpace: "nowrap",
+                  ml: -2,
+                  mr: 14,
                   "&:hover": {
                     background: "linear-gradient(45deg, #e0e0e0, #d6d6d6)",
                     boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.15)",
