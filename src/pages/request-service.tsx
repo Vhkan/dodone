@@ -224,50 +224,6 @@ const RequestServicePage: React.FC = () => {
             <option value="maintenance">Maintenance</option>
           </TextField>
 
-          
-          {/* Service Selection */}
-          <TextField
-            select
-            fullWidth
-            margin="dense"
-            label="Select Service Category"
-            name="service"
-            value={formData.service}
-            onChange={handleChange}
-            required
-            SelectProps={{
-              native: true,
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "30px",
-                height: "40px",
-                padding: "0",
-                "& select": {
-                  padding: "8px 14px",
-                },
-              },
-              "& .MuiInputLabel-root": {
-                fontSize: "1rem",
-                transform: "translate(14px, 12px) scale(1)",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "#1976d2",
-                fontWeight: "bold",
-                transform: "translate(14px, -9px) scale(0.75)",
-              },
-              "& .MuiInputLabel-shrink": {
-                transform: "translate(14px, -9px) scale(0.75)",
-              },
-            }}
-          >
-            <option value=""></option>
-            <option value="repair">Home Specialist</option>
-            <option value="installation">Electronics Repair</option>
-            <option value="maintenance">Closing Repair</option>
-            <option value="maintenance">Auto Repair</option>
-          </TextField>
-
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="Select Date"
