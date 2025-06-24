@@ -374,7 +374,7 @@ const Header = () => {
                 }}
                 startIcon={<MenuIcon />}
               >
-                Categories
+                Service Categories
               </Button>
 
               {!isTablet && (
@@ -385,7 +385,7 @@ const Header = () => {
                       background:
                         "linear-gradient(to bottom, #00c6ff, #0072ff)",
                       color: "white",
-                      padding: { md: "8px 16px", lg: "10px 19px" },
+                      padding: { md: "8px 16px", lg: "10px 28px" },
                       borderRadius: "2em",
                       textTransform: "none",
                       fontWeight: "bold",
@@ -414,7 +414,7 @@ const Header = () => {
                 padding: "4px 8px",
                 flexGrow: 1,
                 mx: { md: 2, lg: 4 },
-                maxWidth: { md: 200, lg: 300 },
+                maxWidth: { md: 100, lg: 230 },
               }}
             >
               <TextField
@@ -431,6 +431,32 @@ const Header = () => {
                 <SearchIcon />
               </IconButton>
             </Box>
+
+            {!isTablet && (
+                <Link href="/request-service" passHref>
+                  <Button
+                    variant="contained"
+                    sx={{
+                      background:
+                        "linear-gradient(to bottom, #00c6ff, #0072ff)",
+                      color: "white",
+                      padding: { md: "8px 16px", lg: "10px 19px" },
+                      borderRadius: "2em",
+                      textTransform: "none",
+                      fontWeight: "bold",
+                      whiteSpace: "nowrap",
+                      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                      "&:hover": {
+                        background:
+                          "linear-gradient(to bottom, #3399ff, #0072ff)",
+                        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+                      },
+                    }}
+                  >
+                    Become a Specialist
+                  </Button>
+                </Link>
+              )}
 
             {/* Language Selection */}
             <Box
