@@ -433,30 +433,28 @@ const Header = () => {
             </Box>
 
             {!isTablet && (
-                <Link href="/request-service" passHref>
-                  <Button
-                    variant="contained"
-                    sx={{
-                      background:
-                        "linear-gradient(to bottom, #00c6ff, #0072ff)",
-                      color: "white",
-                      padding: { md: "8px 16px", lg: "10px 19px" },
-                      borderRadius: "2em",
-                      textTransform: "none",
-                      fontWeight: "bold",
-                      whiteSpace: "nowrap",
-                      boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
-                      "&:hover": {
-                        background:
-                          "linear-gradient(to bottom, #3399ff, #0072ff)",
-                        boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                      },
-                    }}
-                  >
-                    Become a Specialist
-                  </Button>
-                </Link>
-              )}
+              <Link href="/become-specialist" passHref>
+                <Button
+                  variant="contained"
+                  sx={{
+                    background: "linear-gradient(to top, #00c6ff, #0072ff)", // Changed to top
+                    color: "white",
+                    padding: { md: "8px 16px", lg: "10px 19px" },
+                    borderRadius: "2em",
+                    textTransform: "none",
+                    fontWeight: "bold",
+                    whiteSpace: "nowrap",
+                    boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
+                    "&:hover": {
+                      background: "linear-gradient(to top, #3399ff, #0072ff)", // Changed to top
+                      boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+                    },
+                  }}
+                >
+                  Become a Specialist
+                </Button>
+              </Link>
+            )}
 
             {/* Language Selection */}
             <Box
