@@ -261,8 +261,6 @@ const RequestServicePage: React.FC = () => {
               }}
             />
           </LocalizationProvider>
-
-          {/* Service Details */}
           <TextField
             fullWidth
             margin="dense"
@@ -276,8 +274,11 @@ const RequestServicePage: React.FC = () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
-                padding: "4px",
+                padding: 0, // reset outer padding
                 height: "90px",
+                "& textarea": {
+                  padding: "12px 14px", // fix cursor and content spacing inside textarea
+                },
               },
               "& .MuiInputLabel-root": { fontSize: "1rem" },
             }}
