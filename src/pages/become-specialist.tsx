@@ -148,7 +148,10 @@ const BecomeSpecialistPage: React.FC = () => {
               "& .MuiOutlinedInput-root": {
                 ...inputSx["& .MuiOutlinedInput-root"],
                 height: "auto",
-                padding: "4px",
+                padding: 0, // reset outer padding
+                "& textarea": {
+                  padding: "12px 14px", // this controls the inner padding of the multiline area
+                },
               },
             }}
           />
