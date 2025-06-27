@@ -134,28 +134,6 @@ const BecomeSpecialistPage: React.FC = () => {
             margin="normal"
             sx={inputSx}
           />
-          <TextField
-            fullWidth
-            label="Details"
-            name="details"
-            value={formData.details}
-            onChange={handleChange}
-            margin="normal"
-            multiline
-            rows={4}
-            sx={{
-              ...inputSx,
-              "& .MuiOutlinedInput-root": {
-                ...inputSx["& .MuiOutlinedInput-root"],
-                height: "auto",
-                padding: 0, // reset outer padding
-                "& textarea": {
-                  padding: "12px 14px", // this controls the inner padding of the multiline area
-                },
-              },
-            }}
-          />
-
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="Available Date"
@@ -183,7 +161,27 @@ const BecomeSpecialistPage: React.FC = () => {
               }}
             />
           </LocalizationProvider>
-
+          <TextField
+            fullWidth
+            label="Details"
+            name="details"
+            value={formData.details}
+            onChange={handleChange}
+            margin="normal"
+            multiline
+            rows={4}
+            sx={{
+              ...inputSx,
+              "& .MuiOutlinedInput-root": {
+                ...inputSx["& .MuiOutlinedInput-root"],
+                height: "auto",
+                padding: 0, // reset outer padding
+                "& textarea": {
+                  padding: "12px 14px", // this controls the inner padding of the multiline area
+                },
+              },
+            }}
+          />
           {/* Submit Button */}
           <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
             <Button

@@ -86,7 +86,7 @@ const RequestServicePage: React.FC = () => {
           <TextField
             fullWidth
             margin="dense"
-            label="Your Name"
+            label="Name"
             name="name"
             value={formData.name}
             onChange={handleChange}
@@ -152,7 +152,7 @@ const RequestServicePage: React.FC = () => {
           <TextField
             fullWidth
             margin="dense"
-            label="Phone Number"
+            label="Phone"
             name="phone"
             type="tel"
             value={formData.phone}
@@ -267,7 +267,7 @@ const RequestServicePage: React.FC = () => {
             label="Service Details"
             name="details"
             multiline
-            rows={3}
+            rows={4}
             value={formData.details}
             onChange={handleChange}
             required
@@ -275,7 +275,7 @@ const RequestServicePage: React.FC = () => {
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
                 padding: 0, // reset outer padding
-                height: "90px",
+                height: "auto", // allow height to adjust based on content
                 "& textarea": {
                   padding: "12px 14px", // fix cursor and content spacing inside textarea
                 },
