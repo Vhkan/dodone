@@ -1,5 +1,6 @@
 import Header from "../components/Header";
 import CategoriesList from "@/components/Categories";
+import Footer from "@/components/Footer";
 import HowItWorks from "@/components/HowItWorks";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
         <CategoriesList />
         <HowItWorks/>
       </section>
+      <Footer/>
     </main>
   );
 }
