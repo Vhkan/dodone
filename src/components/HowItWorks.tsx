@@ -5,26 +5,26 @@ const steps = [
   {
     title: "Create a Service Request",
     description: "Fill out the service request form with your details.",
-    image: "/icons8-service-96.png",
+    image: "/service.png",
   },
   {
     title: "Connect with Specialists",
     description:
       "Our specialists will review your request and reach out to you.",
-    image: "/doDoneLogo2.png",
+    image: "/connection.png",
   },
   {
     title: "Get Your Service Done",
     description:
       "Leave a review after the service completion.",
-    image: "/doDone1.jpg",
+    image: "/easy-installation.png",
   },
 ];
 
 const HowItWorks: React.FC = () => {
   return (
     <section className="py-16 px-4 bg-white">
-      <h2 className="text-3xl font-semibold text-center mb-12">
+      <h2 className="text-3xl font-semibold text-center mb-12 text-gray-700">
         How DoDone Works
       </h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
