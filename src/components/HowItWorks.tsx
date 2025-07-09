@@ -8,7 +8,7 @@ const steps = [
     image: "/service.png",
   },
   {
-    title: "Connect with Specialists",
+    title: "Connect with a Specialist",
     description:
       "Our specialists will review your request and reach out to you.",
     image: "/connection.png",
