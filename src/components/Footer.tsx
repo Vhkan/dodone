@@ -1,15 +1,14 @@
 import { AppBar, Box, Toolbar, Typography, Stack, Link } from "@mui/material";
+
 const Footer = () => {
   return (
     <AppBar
       position="static"
       sx={{
         background:
-          "linear-gradient(to bottom, #f0faff 0%, #c2e4ff 20%, #66b2ff 45%, #1a75ff 75%, #003d73 100%)",
-        color: "#002f5f",
-        mt: 4,
-        paddingY: 3,
-        boxShadow: "0px -3px 12px rgba(0, 0, 150, 0.07)",
+          "linear-gradient(to right, #FFFFFF 0%, #f9f9f9 20%, #f0f0f0 80%, #f0f0f0 100%)",
+        boxShadow: "0px 8px 12px rgba(0,0,0,0.08)",
+        paddingY: 2,
       }}
     >
       <Toolbar
@@ -23,25 +22,26 @@ const Footer = () => {
         }}
       >
         {/* Logo / Title */}
-        <Typography
-          variant="h5"
-          component="div"
-          sx={{ fontWeight: "bold", mb: { xs: 2, md: 0 }, paddingTop: "0.5em" }}
+        <Box
+          sx={{
+            height: { xs: 60, sm: 70, md: 85 },
+            marginLeft: { xs: 0, sm: -7, md: -8 },
+            flexShrink: 0,
+          }}
         >
-          <Link href="#" underline="none" color="inherit">
-            DoDone
-          </Link>
-        </Typography>
-        {/* Logo with home page link
-                <Box sx={{ height: 85, marginLeft: "-1.5em" }}>
-                <Link href="#" underline="none" color="inherit">
+          <Link
+            href="/"
+            underline="none"
+            sx={{ display: "block", height: "100%" }}
+          >
             <img
               src="/doDoneLogo2.png"
               alt="doDone Logo"
               style={{ height: "100%", width: "auto", cursor: "pointer" }}
             />
           </Link>
-        </Box> */}
+        </Box>
+
         {/* Footer Categories */}
         <Stack
           direction="row"
@@ -51,21 +51,21 @@ const Footer = () => {
           <Box>
             <Typography
               variant="subtitle1"
-              sx={{ fontWeight: "bold", mb: 1, color: "#336699" }}
+              sx={{ fontWeight: "bold", mb: 1, color: "#204060" }}
             >
               Who we are
             </Typography>
             <Stack spacing={0.5}>
-              <Link href="#" underline="hover" sx={{ color: "#cce6ff" }}>
+              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
                 About DoDone
               </Link>
-              <Link href="#" underline="hover" sx={{ color: "#cce6ff" }}>
+              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
                 Contact us
               </Link>
             </Stack>
           </Box>
 
-          {/* How it works */}
+          {/* How it works (commented out) */}
           {/* <Box>
             <Typography
               variant="subtitle1"
@@ -83,19 +83,18 @@ const Footer = () => {
             </Stack>
           </Box> */}
 
-          {/* Help */}
           <Box>
             <Typography
               variant="subtitle1"
-              sx={{ fontWeight: "bold", mb: 1, color: "#336699" }}
+              sx={{ fontWeight: "bold", mb: 1, color: "#204060" }}
             >
               Help
             </Typography>
             <Stack spacing={0.5}>
-              <Link href="#" underline="hover" sx={{ color: "#cce6ff" }}>
+              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
                 Questions & answers
               </Link>
-              <Link href="#" underline="hover" sx={{ color: "#cce6ff" }}>
+              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
                 Confidentiality rules
               </Link>
             </Stack>
@@ -105,4 +104,5 @@ const Footer = () => {
     </AppBar>
   );
 };
+
 export default Footer;
