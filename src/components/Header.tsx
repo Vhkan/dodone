@@ -311,14 +311,14 @@ const Header = () => {
         {/* Logo with home page link */}
         <Box
           sx={{
-            height: { xs: 60, sm: 70, md: 85 },
-            marginLeft: { xs: 0, sm: -1.5, md: -2 },
+            height: { xs: 200, sm: 200, md: 200 },
+            marginLeft: { xs: 0, sm: -1, md: -2 },
             flexShrink: 0,
           }}
         >
           <Link href="/" passHref style={{ display: "block", height: "100%" }}>
             <img
-              src="/doDoneLogo2.png"
+              src="/DodoneLogo4.png"
               alt="doDone Logo"
               style={{ height: "100%", width: "auto", cursor: "pointer" }}
             />

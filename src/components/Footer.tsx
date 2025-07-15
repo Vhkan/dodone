@@ -23,19 +23,20 @@ const Footer = () => {
       >
         {/* Logo / Title */}
         <Box
-          sx={{
-            height: { xs: 60, sm: 70, md: 85 },
-            marginLeft: { xs: 0, sm: -7, md: -8 },
-            flexShrink: 0,
-          }}
-        >
+  sx={{
+    height: { xs: 100, sm: 100, md: 100 },
+    marginLeft: { xs: -1, sm: -2, md: -4 }, // shifted more left
+    flexShrink: 0,
+  }}
+>
+
           <Link
             href="/"
             underline="none"
             sx={{ display: "block", height: "100%" }}
           >
             <img
-              src="/doDoneLogo2.png"
+              src="/DodoneLogo4.png"
               alt="doDone Logo"
               style={{ height: "100%", width: "auto", cursor: "pointer" }}
             />
