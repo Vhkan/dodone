@@ -1,14 +1,14 @@
 import { AppBar, Box, Toolbar, Typography, Stack, Link } from "@mui/material";
+
 const Footer = () => {
   return (
     <AppBar
       position="static"
       sx={{
-        background: "linear-gradient(to bottom, #b3d9ff, #80bfff)",
-        color: "#003366",
-        mt: 4,
-        boxShadow: "0px -2px 8px rgba(0, 0, 0, 0.05)",
-        paddingY: 4,
+        background:
+          "linear-gradient(to right, #FFFFFF 0%, #f9f9f9 20%, #f0f0f0 80%, #f0f0f0 100%)",
+        boxShadow: "0px 8px 12px rgba(0,0,0,0.08)",
+        paddingY: 2,
       }}
     >
       <Toolbar
@@ -22,81 +22,80 @@ const Footer = () => {
         }}
       >
         {/* Logo / Title */}
-        <Typography
-          variant="h6"
-          component="div"
-          sx={{ fontWeight: "bold", mb: { xs: 2, md: 0 } }}
-        >
-          <Link href="#" underline="none" color="inherit">
-            DoDone
-          </Link>
-        </Typography>
-        {/* Logo with home page link
-                <Box sx={{ height: 85, marginLeft: "-1.5em" }}>
-                <Link href="#" underline="none" color="inherit">
+        <Box
+  sx={{
+    height: { xs: 100, sm: 100, md: 100 },
+    marginLeft: { xs: -1, sm: -2, md: -4 }, // shifted more left
+    flexShrink: 0,
+  }}
+>
+
+          <Link
+            href="/"
+            underline="none"
+            sx={{ display: "block", height: "100%" }}
+          >
             <img
-              src="/doDoneLogo2.png"
+              src="/DodoneLogo4.png"
               alt="doDone Logo"
               style={{ height: "100%", width: "auto", cursor: "pointer" }}
             />
           </Link>
-        </Box> */}
+        </Box>
+
         {/* Footer Categories */}
         <Stack
           direction="row"
           spacing={6}
           sx={{ textAlign: { xs: "center", md: "left" } }}
         >
-          {/* About Us */}
           <Box>
             <Typography
               variant="subtitle1"
-              sx={{ fontWeight: "bold", mb: 1, color: "#336699" }}
+              sx={{ fontWeight: "bold", mb: 1, color: "#204060" }}
             >
-              About Us
+              Who we are
             </Typography>
             <Stack spacing={0.5}>
-              <Link href="#" underline="hover" color="#cce6ff">
-                About Project DoDane
+              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
+                About DoDone
               </Link>
-              <Link href="#" underline="hover" color="#cce6ff">
-                Contacts
-              </Link>
-              <Link href="#" underline="hover" color="#cce6ff">
-                Where you can find us
+              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
+                Contact us
               </Link>
             </Stack>
           </Box>
-          {/* How does it work */}
-          <Box>
+
+          {/* How it works (commented out) */}
+          {/* <Box>
             <Typography
               variant="subtitle1"
               sx={{ fontWeight: "bold", mb: 1, color: "#336699" }}
             >
-              How does it work
+              How it works
             </Typography>
             <Stack spacing={0.5}>
-              <Link href="#" underline="hover" color="#cce6ff">
-                How to order the service
+              <Link href="#" underline="hover" sx={{ color: "#cce6ff" }}>
+                How DoDone works
               </Link>
-              <Link href="#" underline="hover" color="#cce6ff">
+              <Link href="#" underline="hover" sx={{ color: "#cce6ff" }}>
                 Top of the best providers
               </Link>
             </Stack>
-          </Box>
-          {/* Help */}
+          </Box> */}
+
           <Box>
             <Typography
               variant="subtitle1"
-              sx={{ fontWeight: "bold", mb: 1, color: "#336699" }}
+              sx={{ fontWeight: "bold", mb: 1, color: "#204060" }}
             >
               Help
             </Typography>
             <Stack spacing={0.5}>
-              <Link href="#" underline="hover" color="#cce6ff">
-                Questions and answers
+              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
+                Questions & answers
               </Link>
-              <Link href="#" underline="hover" color="#cce6ff">
+              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
                 Confidentiality rules
               </Link>
             </Stack>
@@ -106,4 +105,5 @@ const Footer = () => {
     </AppBar>
   );
 };
+
 export default Footer;

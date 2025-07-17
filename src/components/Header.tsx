@@ -295,10 +295,10 @@ const Header = () => {
     <AppBar
       position="fixed"
       sx={{
-        background:
-          "linear-gradient(to right, #FFFFFF 0%, #f9f9f9 20%, #f0f0f0 80%, #f0f0f0 100%)",
-        boxShadow: 2,
+        background:"#ffffff", 
+        boxShadow: "none",
       }}
+      
     >
       <Toolbar
         sx={{
@@ -311,14 +311,15 @@ const Header = () => {
         {/* Logo with home page link */}
         <Box
           sx={{
-            height: { xs: 60, sm: 70, md: 85 },
-            marginLeft: { xs: 0, sm: -1.5, md: -2 },
+            height: { xs: 170, sm: 170, md: 170 },
+            position: "relative",
+            left: "-40px", // shift left; adjust as needed
             flexShrink: 0,
           }}
         >
           <Link href="/" passHref style={{ display: "block", height: "100%" }}>
             <img
-              src="/doDoneLogo2.png"
+              src="/DodoneLogo4.png"
               alt="doDone Logo"
               style={{ height: "100%", width: "auto", cursor: "pointer" }}
             />
