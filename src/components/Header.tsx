@@ -295,10 +295,10 @@ const Header = () => {
     <AppBar
       position="fixed"
       sx={{
-        background:
-          "linear-gradient(to right, #FFFFFF 0%, #f9f9f9 20%, #f0f0f0 80%, #f0f0f0 100%)",
-        boxShadow: 2,
+        background:"#ffffff", 
+        boxShadow: "none",
       }}
+      
     >
       <Toolbar
         sx={{
@@ -311,8 +311,9 @@ const Header = () => {
         {/* Logo with home page link */}
         <Box
           sx={{
-            height: { xs: 200, sm: 200, md: 200 },
-            marginLeft: { xs: 0, sm: -1, md: -2 },
+            height: { xs: 170, sm: 170, md: 170 },
+            position: "relative",
+            left: "-40px", // shift left; adjust as needed
             flexShrink: 0,
           }}
         >
