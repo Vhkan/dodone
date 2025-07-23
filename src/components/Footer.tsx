@@ -5,8 +5,7 @@ const Footer = () => {
     <AppBar
       position="static"
       sx={{
-        background:
-          "linear-gradient(to right, #FFFFFF 0%, #f9f9f9 20%, #f0f0f0 80%, #f0f0f0 100%)",
+        background: " #FFFFFF",
         boxShadow: "0px 8px 12px rgba(0,0,0,0.08)",
         paddingY: 2,
       }}
@@ -18,25 +17,24 @@ const Footer = () => {
           alignItems: "flex-start",
           flexDirection: { xs: "column", md: "row" },
           width: "100%",
-          px: { xs: 2, md: 8 },
+          px: { xs: 1, md: 8 },
         }}
       >
         {/* Logo / Title */}
         <Box
-  sx={{
-    height: { xs: 100, sm: 100, md: 100 },
-    marginLeft: { xs: -1, sm: -2, md: -4 }, // shifted more left
-    flexShrink: 0,
-  }}
->
-
+          sx={{
+            height: { xs: 100, sm: 100, md: 100 },
+            marginLeft: { xs: -1, sm: -2, md: -7 },
+            flexShrink: 0,
+          }}
+        >
           <Link
             href="/"
             underline="none"
             sx={{ display: "block", height: "100%" }}
           >
             <img
-              src="/DodoneLogo4.png"
+              src="/logo9.png"
               alt="doDone Logo"
               style={{ height: "100%", width: "auto", cursor: "pointer" }}
             />

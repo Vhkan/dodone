@@ -217,7 +217,7 @@ const CategoriesList = () => {
           gap: "20px",
           maxWidth: "1400px",
           margin: "0 auto",
-          marginTop: "4em", // Added margin to separate from the top content
+          marginTop: "3em", // Added margin to separate from the top content
         }}
       >
         {categories.map((category, index) => (
