@@ -10,6 +10,7 @@ import {
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const inputSx = {
   "& .MuiOutlinedInput-root": {
@@ -77,138 +78,159 @@ const BecomeSpecialistPage: React.FC = () => {
         minHeight: "100vh",
         margin: 0,
         padding: 0,
+        overflow: "hidden", // Prevent any overflow
       }}
     >
-      <Box sx={{ width: "100%", margin: 0, padding: 0 }}>
+      <Box sx={{ width: "100%", margin: 0, padding: 0, flexShrink: 0 }}>
         <Header />
       </Box>
-      <Container maxWidth="sm" sx={{ marginTop: 4 }}>
-        <Typography variant="h4" gutterBottom>
-          Become a Specialist
-        </Typography>
+      
+      {/* Main content container with proper flex handling */}
+      <Box 
+        sx={{ 
+          flex: 1, 
+          display: "flex", 
+          flexDirection: "column",
+          overflow: "auto", // Allow scrolling only within this container
+          paddingBottom: 0, // Remove any bottom padding
+        }}
+      >
+        <Container 
+          maxWidth="sm" 
+          sx={{ 
+            marginTop: 18,
+            paddingBottom: 4, // Add some space before footer
+            flex: 1,
+          }}
+        >
+          <Typography variant="h5" gutterBottom>
+            Become a Specialist
+          </Typography>
 
-        {submitted && (
-          <Alert severity="success" sx={{ mb: 2 }}>
-            Your request has been submitted!
-          </Alert>
-        )}
+          {submitted && (
+            <Alert severity="success" sx={{ mb: 2 }}>
+              Your request has been submitted!
+            </Alert>
+          )}
 
-        <form onSubmit={handleSubmit}>
-          <TextField
-            fullWidth
-            label="Name"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            margin="normal"
-            required
-            sx={inputSx}
-          />
-          <TextField
-            fullWidth
-            label="Email"
-            name="email"
-            type="email"
-            value={formData.email}
-            onChange={handleChange}
-            margin="normal"
-            required
-            sx={inputSx}
-          />
-          <TextField
-            fullWidth
-            label="Phone"
-            name="phone"
-            type="tel"
-            value={formData.phone}
-            onChange={handleChange}
-            margin="normal"
-            sx={inputSx}
-          />
-          <TextField
-            fullWidth
-            label="Expertise"
-            name="expertise"
-            value={formData.expertise}
-            onChange={handleChange}
-            margin="normal"
-            sx={inputSx}
-          />
-          <LocalizationProvider dateAdapter={AdapterDateFns}>
-            <DatePicker
-              label="Available Date"
-              value={formData.selectedDate}
-              onChange={handleDateChange}
-              slotProps={{
-                textField: {
-                  fullWidth: true,
-                  margin: "normal",
-                  sx: {
-                    ...inputSx,
-                    "& .MuiOutlinedInput-root": {
-                      ...inputSx["& .MuiOutlinedInput-root"],
-                      padding: "0 8px",
-                      alignItems: "center",
+          <form onSubmit={handleSubmit}>
+            <TextField
+              fullWidth
+              label="Name"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              margin="normal"
+              required
+              sx={inputSx}
+            />
+            <TextField
+              fullWidth
+              label="Email"
+              name="email"
+              type="email"
+              value={formData.email}
+              onChange={handleChange}
+              margin="normal"
+              required
+              sx={inputSx}
+            />
+            <TextField
+              fullWidth
+              label="Phone"
+              name="phone"
+              type="tel"
+              value={formData.phone}
+              onChange={handleChange}
+              margin="normal"
+              sx={inputSx}
+            />
+            <TextField
+              fullWidth
+              label="Expertise"
+              name="expertise"
+              value={formData.expertise}
+              onChange={handleChange}
+              margin="normal"
+              sx={inputSx}
+            />
+            <LocalizationProvider dateAdapter={AdapterDateFns}>
+              <DatePicker
+                label="Available Date"
+                value={formData.selectedDate}
+                onChange={handleDateChange}
+                slotProps={{
+                  textField: {
+                    fullWidth: true,
+                    margin: "normal",
+                    sx: {
+                      ...inputSx,
+                      "& .MuiOutlinedInput-root": {
+                        ...inputSx["& .MuiOutlinedInput-root"],
+                        padding: "0 8px",
+                        alignItems: "center",
+                      },
+                      "& input": {
+                        padding: "0 !important",
+                        height: "100%",
+                        textAlign: "center",
+                        fontSize: "1rem",
+                      },
                     },
-                    "& input": {
-                      padding: "0 !important",
-                      height: "100%",
-                      textAlign: "center",
-                      fontSize: "1rem",
-                    },
+                  },
+                }}
+              />
+            </LocalizationProvider>
+            <TextField
+              fullWidth
+              label="Details"
+              name="details"
+              value={formData.details}
+              onChange={handleChange}
+              margin="normal"
+              multiline
+              rows={4}
+              sx={{
+                ...inputSx,
+                "& .MuiOutlinedInput-root": {
+                  ...inputSx["& .MuiOutlinedInput-root"],
+                  height: "auto",
+                  padding: 0,
+                  "& textarea": {
+                    padding: "12px 14px",
                   },
                 },
               }}
             />
-          </LocalizationProvider>
-          <TextField
-            fullWidth
-            label="Details"
-            name="details"
-            value={formData.details}
-            onChange={handleChange}
-            margin="normal"
-            multiline
-            rows={4}
-            sx={{
-              ...inputSx,
-              "& .MuiOutlinedInput-root": {
-                ...inputSx["& .MuiOutlinedInput-root"],
-                height: "auto",
-                padding: 0, // reset outer padding
-                "& textarea": {
-                  padding: "12px 14px", // this controls the inner padding of the multiline area
-                },
-              },
-            }}
-          />
-          {/* Submit Button */}
-          <Box sx={{ display: "flex", justifyContent: "center", mt: 2 }}>
-            <Button
-              type="submit"
-              variant="contained"
-              sx={{
-                background: "linear-gradient(to bottom, #00c6ff, #0072ff)",
-                color: "white",
-                padding: "10px 60px",
-                borderRadius: "2em",
-                textTransform: "none",
-                fontWeight: "bold",
-                "&:hover": {
-                  background: "linear-gradient(to bottom, #3399ff, #0072ff)",
-                  boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                },
-                "&:focus": {
-                  outline: "none",
-                  boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
-                },
-              }}
-            >
-              Submit Request
-            </Button>
-          </Box>
-        </form>
-      </Container>
+            {/* Submit Button */}
+            <Box sx={{ display: "flex", justifyContent: "center", mt: 2, mb: 0 }}>
+              <Button
+                type="submit"
+                variant="contained"
+                sx={{
+                  background: "linear-gradient(to bottom, #00c6ff, #0072ff)",
+                  color: "white",
+                  padding: "10px 60px",
+                  borderRadius: "2em",
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  "&:hover": {
+                    background: "linear-gradient(to bottom, #3399ff, #0072ff)",
+                    boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
+                  },
+                  "&:focus": {
+                    outline: "none",
+                    boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
+                  },
+                }}
+              >
+                Submit Request
+              </Button>
+            </Box>
+          </form>
+        </Container>
+      </Box>    
+      <Footer/>
     </Box>
   );
 };

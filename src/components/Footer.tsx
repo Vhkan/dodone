@@ -5,95 +5,148 @@ const Footer = () => {
     <AppBar
       position="static"
       sx={{
-        background: " #FFFFFF",
+        background: "#FFFFFF",
         boxShadow: "0px 8px 12px rgba(0,0,0,0.08)",
         paddingY: 2,
+        marginTop: "auto",
+        position: "relative",
+        bottom: 0,
+        width: "100%",
+        fontFamily: 'inherit',
+        fontSize: '16px',
       }}
     >
       <Toolbar
         sx={{
           display: "flex",
-          justifyContent: "space-between",
-          alignItems: "flex-start",
-          flexDirection: { xs: "column", md: "row" },
+          justifyContent: "space-between", // This creates space between left and right
+          alignItems: "center",
           width: "100%",
-          px: { xs: 1, md: 8 },
+          maxWidth: "1200px",
+          margin: "0 auto",
+          px: { xs: 2, sm: 4, md: 8 },
+          flexDirection: { xs: "column", md: "row" }, // Stack on mobile, row on desktop
+          gap: { xs: 2, md: 0 },
         }}
       >
-        {/* Logo / Title */}
+        {/* Logo - Left Side */}
         <Box
           sx={{
-            height: { xs: 100, sm: 100, md: 100 },
-            marginLeft: { xs: -1, sm: -2, md: -7 },
-            flexShrink: 0,
+            display: "flex",
+            alignItems: "center",
+            height: { xs: 80, sm: 90, md: 100 },
+            marginLeft: { xs: 0, md: -4 } // Adjust margin for larger screens
           }}
         >
           <Link
             href="/"
             underline="none"
-            sx={{ display: "block", height: "100%" }}
+            sx={{ 
+              display: "block", 
+              height: "100%",
+              textDecoration: "none",
+            }}
           >
             <img
               src="/logo9.png"
               alt="doDone Logo"
-              style={{ height: "100%", width: "auto", cursor: "pointer" }}
+              style={{ 
+                height: "100%", 
+                width: "auto", 
+                cursor: "pointer",
+                objectFit: "contain",
+              }}
             />
           </Link>
         </Box>
 
-        {/* Footer Categories */}
+        {/* Text - Right Side */}
         <Stack
-          direction="row"
-          spacing={6}
-          sx={{ textAlign: { xs: "center", md: "left" } }}
+          direction={{ xs: "column", sm: "row" }}
+          spacing={{ xs: 3, sm: 4, md: 6 }}
+          sx={{ 
+            alignItems: { xs: "center", md: "center" },
+          }}
         >
-          <Box>
+          <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
             <Typography
               variant="subtitle1"
-              sx={{ fontWeight: "bold", mb: 1, color: "#204060" }}
+              sx={{ 
+                fontWeight: "bold", 
+                mb: 1, 
+                color: "#204060",
+                fontSize: { xs: "0.9rem", md: "1rem" },
+              }}
             >
               Who we are
             </Typography>
-            <Stack spacing={0.5}>
-              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
+            <Stack spacing={0.5} sx={{ alignItems: { xs: "center", md: "flex-start" } }}>
+              <Link 
+                href="#" 
+                underline="hover" 
+                sx={{ 
+                  color: "#2a5a80",
+                  fontSize: { xs: "0.85rem", md: "0.9rem" },
+                  "&:hover": {
+                    color: "#204060",
+                  }
+                }}
+              >
                 About DoDone
               </Link>
-              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
+              <Link 
+                href="#" 
+                underline="hover" 
+                sx={{ 
+                  color: "#2a5a80",
+                  fontSize: { xs: "0.85rem", md: "0.9rem" },
+                  "&:hover": {
+                    color: "#204060",
+                  }
+                }}
+              >
                 Contact us
               </Link>
             </Stack>
           </Box>
 
-          {/* How it works (commented out) */}
-          {/* <Box>
+          <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
             <Typography
               variant="subtitle1"
-              sx={{ fontWeight: "bold", mb: 1, color: "#336699" }}
-            >
-              How it works
-            </Typography>
-            <Stack spacing={0.5}>
-              <Link href="#" underline="hover" sx={{ color: "#cce6ff" }}>
-                How DoDone works
-              </Link>
-              <Link href="#" underline="hover" sx={{ color: "#cce6ff" }}>
-                Top of the best providers
-              </Link>
-            </Stack>
-          </Box> */}
-
-          <Box>
-            <Typography
-              variant="subtitle1"
-              sx={{ fontWeight: "bold", mb: 1, color: "#204060" }}
+              sx={{ 
+                fontWeight: "bold", 
+                mb: 1, 
+                color: "#204060",
+                fontSize: { xs: "0.9rem", md: "1rem" },
+              }}
             >
               Help
             </Typography>
-            <Stack spacing={0.5}>
-              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
+            <Stack spacing={0.5} sx={{ alignItems: { xs: "center", md: "flex-start" } }}>
+              <Link 
+                href="#" 
+                underline="hover" 
+                sx={{ 
+                  color: "#2a5a80",
+                  fontSize: { xs: "0.85rem", md: "0.9rem" },
+                  "&:hover": {
+                    color: "#204060",
+                  }
+                }}
+              >
                 Questions & answers
               </Link>
-              <Link href="#" underline="hover" sx={{ color: "#2a5a80" }}>
+              <Link 
+                href="#" 
+                underline="hover" 
+                sx={{ 
+                  color: "#2a5a80",
+                  fontSize: { xs: "0.85rem", md: "0.9rem" },
+                  "&:hover": {
+                    color: "#204060",
+                  }
+                }}
+              >
                 Confidentiality rules
               </Link>
             </Stack>

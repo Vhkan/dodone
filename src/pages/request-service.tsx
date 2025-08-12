@@ -10,6 +10,7 @@ import {
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import Header from "../components/Header";
+import Footer from "../components/Footer";
 
 const RequestServicePage: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -311,6 +312,7 @@ const RequestServicePage: React.FC = () => {
           </Button>
         </Box>
       </Container>
+      <Footer />
     </Box>
   );
 };
