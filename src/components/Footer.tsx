@@ -35,7 +35,7 @@ const Footer = () => {
             display: "flex",
             alignItems: "center",
             height: { xs: 80, sm: 90, md: 100 },
-            marginLeft: { xs: 0, md: -4 } // Adjust margin for larger screens
+            marginLeft: { xs: 0, md: -28 } // Adjust margin for larger screens
           }}
         >
           <Link
@@ -66,6 +66,7 @@ const Footer = () => {
           spacing={{ xs: 3, sm: 4, md: 6 }}
           sx={{ 
             alignItems: { xs: "center", md: "center" },
+            marginRight: { xs: 0, md: -20 }
           }}
         >
           <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
