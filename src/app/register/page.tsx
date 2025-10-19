@@ -2,8 +2,6 @@
 
 import { useState } from "react";
 import { TextField, Button, Container, Typography, Box } from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
-import HandymanIcon from "@mui/icons-material/Handyman";
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -66,7 +64,7 @@ const Register = () => {
             }}
           >
             <img
-              src="/mechanic.png"
+              src="/mechanic (2).png"
               alt="Contractor"
               width={100}
               height={100}

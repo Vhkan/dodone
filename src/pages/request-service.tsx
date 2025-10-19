@@ -50,18 +50,24 @@ const RequestServicePage: React.FC = () => {
   return (
     <Box
       sx={{
+        width: "100%",
+        minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        minHeight: "100vh",
-        margin: 0,
-        padding: 0,
+        overflowX: "hidden", // prevent horizontal scroll
+        overflowY: "auto",   // allow vertical scroll if content is taller
       }}
     >
-      <Box sx={{ width: "100%", margin: 0, padding: 0 }}>
-        <Header />
-      </Box>
+      <Header />
 
-      <Container maxWidth="sm" sx={{ mt: 15 }}>
+      <Container
+        maxWidth="sm"
+        sx={{
+          mt: 14, // reduce large top margin to avoid overflow
+          mb: 4,
+          flex: 1,
+        }}
+      >
         <Typography variant="h5" gutterBottom>
           Create a Service Request
         </Typography>
@@ -81,9 +87,10 @@ const RequestServicePage: React.FC = () => {
             display: "flex",
             flexDirection: "column",
             alignItems: "center",
-            gap: 1, // controls vertical spacing between fields
+            gap: 1,
           }}
         >
+          {/* Name Input */}
           <TextField
             fullWidth
             margin="dense"
@@ -96,25 +103,11 @@ const RequestServicePage: React.FC = () => {
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
                 height: "40px",
-                padding: "0",
-                "& input": {
-                  padding: "8px 14px",
-                },
-              },
-              "& .MuiInputLabel-root": {
-                fontSize: "1rem",
-                transform: "translate(14px, 12px) scale(1)", // Initial position of label
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "#1976d2",
-                fontWeight: "bold",
-                transform: "translate(14px, -9px) scale(0.75)", // Move label up when focused
-              },
-              "& .MuiInputLabel-shrink": {
-                transform: "translate(14px, -9px) scale(0.75)", // Move label up when value is filled
+                "& input": { padding: "8px 14px" },
               },
             }}
           />
+
           {/* Email Input */}
           <TextField
             fullWidth
@@ -129,22 +122,7 @@ const RequestServicePage: React.FC = () => {
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
                 height: "40px",
-                padding: "0",
-                "& input": {
-                  padding: "8px 14px",
-                },
-              },
-              "& .MuiInputLabel-root": {
-                fontSize: "1rem",
-                transform: "translate(14px, 12px) scale(1)",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "#1976d2",
-                fontWeight: "bold",
-                transform: "translate(14px, -9px) scale(0.75)",
-              },
-              "& .MuiInputLabel-shrink": {
-                transform: "translate(14px, -9px) scale(0.75)",
+                "& input": { padding: "8px 14px" },
               },
             }}
           />
@@ -163,22 +141,7 @@ const RequestServicePage: React.FC = () => {
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
                 height: "40px",
-                padding: "0",
-                "& input": {
-                  padding: "8px 14px",
-                },
-              },
-              "& .MuiInputLabel-root": {
-                fontSize: "1rem",
-                transform: "translate(14px, 12px) scale(1)",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "#1976d2",
-                fontWeight: "bold",
-                transform: "translate(14px, -9px) scale(0.75)",
-              },
-              "& .MuiInputLabel-shrink": {
-                transform: "translate(14px, -9px) scale(0.75)",
+                "& input": { padding: "8px 14px" },
               },
             }}
           />
@@ -193,29 +156,12 @@ const RequestServicePage: React.FC = () => {
             value={formData.service}
             onChange={handleChange}
             required
-            SelectProps={{
-              native: true,
-            }}
+            SelectProps={{ native: true }}
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
                 height: "40px",
-                padding: "0",
-                "& select": {
-                  padding: "8px 14px",
-                },
-              },
-              "& .MuiInputLabel-root": {
-                fontSize: "1rem",
-                transform: "translate(14px, 12px) scale(1)",
-              },
-              "& .MuiInputLabel-root.Mui-focused": {
-                color: "#1976d2",
-                fontWeight: "bold",
-                transform: "translate(14px, -9px) scale(0.75)",
-              },
-              "& .MuiInputLabel-shrink": {
-                transform: "translate(14px, -9px) scale(0.75)",
+                "& select": { padding: "8px 14px" },
               },
             }}
           >
@@ -225,6 +171,7 @@ const RequestServicePage: React.FC = () => {
             <option value="maintenance">Maintenance</option>
           </TextField>
 
+          {/* Date Picker */}
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DatePicker
               label="Select Date"
@@ -239,29 +186,16 @@ const RequestServicePage: React.FC = () => {
                     "& .MuiOutlinedInput-root": {
                       borderRadius: "30px",
                       height: "40px",
-                      padding: "0 8px", // horizontal padding only
-                      alignItems: "center", // center content vertically
+                      alignItems: "center",
                     },
-                    "& input": {
-                      padding: "0 !important", // remove default padding
-                      height: "100%",
-                      textAlign: "center",
-                      fontSize: "1rem",
-                    },
-                    "& .MuiInputLabel-root": {
-                      fontSize: "1rem",
-                      top: "-4px", // optional: adjust label positioning
-                    },
-                    "& .MuiInputAdornment-root": {
-                      margin: "0",
-                      position: "absolute",
-                      right: "1em",
-                    },
+                    "& input": { padding: 0, textAlign: "center" },
                   },
                 },
               }}
             />
           </LocalizationProvider>
+
+          {/* Details */}
           <TextField
             fullWidth
             margin="dense"
@@ -275,17 +209,12 @@ const RequestServicePage: React.FC = () => {
             sx={{
               "& .MuiOutlinedInput-root": {
                 borderRadius: "30px",
-                padding: 0, // reset outer padding
-                height: "auto", // allow height to adjust based on content
-                "& textarea": {
-                  padding: "12px 14px", // fix cursor and content spacing inside textarea
-                },
+                "& textarea": { padding: "12px 14px" },
               },
-              "& .MuiInputLabel-root": { fontSize: "1rem" },
             }}
           />
 
-          {/* Submit Button */}
+          {/* Submit */}
           <Button
             type="submit"
             variant="contained"
@@ -295,16 +224,11 @@ const RequestServicePage: React.FC = () => {
               padding: "10px 60px",
               borderRadius: "2em",
               textTransform: "none",
-              marginTop: "0.5em",
               fontWeight: "bold",
+              mt: 2,
               "&:hover": {
-                background: "linear-gradient(to bottom, #3399ff, #0072ff)", // Subtle hover gradient
+                background: "linear-gradient(to bottom, #3399ff, #0072ff)",
                 boxShadow: "0px 6px 12px rgba(0, 0, 0, 0.2)",
-                // transform: "scale(1.02)",
-              },
-              "&:focus": {
-                outline: "none",
-                boxShadow: "0px 0px 8px rgba(0, 191, 255, 0.5)",
               },
             }}
           >
@@ -312,6 +236,7 @@ const RequestServicePage: React.FC = () => {
           </Button>
         </Box>
       </Container>
+
       <Footer />
     </Box>
   );

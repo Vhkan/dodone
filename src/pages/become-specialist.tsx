@@ -76,33 +76,24 @@ const BecomeSpecialistPage: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         minHeight: "100vh",
-        margin: 0,
-        padding: 0,
-        overflow: "hidden", // Prevent any overflow
       }}
     >
-      <Box sx={{ width: "100%", margin: 0, padding: 0, flexShrink: 0 }}>
-        <Header />
-      </Box>
-      
-      {/* Main content container with proper flex handling */}
-      <Box 
-        sx={{ 
-          flex: 1, 
-          display: "flex", 
+      <Header />
+
+      {/* Main content wrapper */}
+      <Box
+        sx={{
+          flex: 1,
+          display: "flex",
           flexDirection: "column",
-          overflow: "auto", // Allow scrolling only within this container
-          paddingBottom: 0, // Remove any bottom padding
+          alignItems: "center",
+          width: "100%",
+          overflow: "hidden", // Remove bottom scroll
+          mt: 14,
+          mb: 4,
         }}
       >
-        <Container 
-          maxWidth="sm" 
-          sx={{ 
-            marginTop: 18,
-            paddingBottom: 4, // Add some space before footer
-            flex: 1,
-          }}
-        >
+        <Container maxWidth="sm">
           <Typography variant="h5" gutterBottom>
             Become a Specialist
           </Typography>
@@ -229,8 +220,8 @@ const BecomeSpecialistPage: React.FC = () => {
             </Box>
           </form>
         </Container>
-      </Box>    
-      <Footer/>
+      </Box>
+      <Footer />
     </Box>
   );
 };
