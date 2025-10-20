@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import {
   Container,
@@ -9,8 +11,8 @@ import {
 } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const inputSx = {
   "& .MuiOutlinedInput-root": {
@@ -35,7 +37,7 @@ const inputSx = {
   },
 };
 
-const BecomeSpecialistPage: React.FC = () => {
+const BecomeSpecialist: React.FC = () => {
   const [formData, setFormData] = React.useState({
     name: "",
     email: "",
@@ -226,4 +228,4 @@ const BecomeSpecialistPage: React.FC = () => {
   );
 };
 
-export default BecomeSpecialistPage;
+export default BecomeSpecialist;
