@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState, FormEvent } from "react";
 import {
   Container,
@@ -9,10 +11,10 @@ import {
 } from "@mui/material";
 import { LocalizationProvider, DatePicker } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
-const RequestServicePage: React.FC = () => {
+const RequestService: React.FC = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -242,4 +244,4 @@ const RequestServicePage: React.FC = () => {
   );
 };
 
-export default RequestServicePage;
+export default RequestService;
