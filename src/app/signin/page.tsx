@@ -11,6 +11,7 @@ import {
 } from "@mui/material";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import ForgotPassword from "../forgot-password/layout";
 
 const inputSx = {
   "& .MuiOutlinedInput-root": {
@@ -102,13 +103,20 @@ const SignIn = () => {
             />
 
             <Box sx={{ textAlign: "right", mt: 1 }}>
-              <Link
-                href="#"
-                underline="hover"
-                sx={{ color: "#0072ff", fontSize: "0.9rem" }}
+              <Button
+                variant="text"
+                sx={{
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  textDecoration: "none", // no underline by default
+                  "&:hover": {
+                    textDecoration: "underline", // underline on hover
+                  },
+                }}
+                href="/forgot-password"
               >
-                Forgot password?
-              </Link>
+                Forgot Password?
+              </Button>
             </Box>
 
             <Box sx={{ display: "flex", justifyContent: "center", mt: 3 }}>
@@ -136,13 +144,20 @@ const SignIn = () => {
           <Box sx={{ textAlign: "center", mt: 3 }}>
             <Typography variant="body1" color="text.secondary">
               Not a user yet?{" "}
-              <Link
+              <Button
+                variant="text"
+                sx={{
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  textDecoration: "none", // no underline by default
+                  "&:hover": {
+                    textDecoration: "underline", // underline on hover
+                  },
+                }}
                 href="/register"
-                underline="hover"
-                sx={{ color: "#0072ff", fontWeight: 500 }}
               >
                 Register here
-              </Link>
+              </Button>
             </Typography>
           </Box>
         </Container>
