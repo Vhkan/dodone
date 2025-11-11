@@ -96,7 +96,8 @@ const BecomeSpecialist: React.FC = () => {
         }}
       >
         <Container maxWidth="sm">
-          <Typography variant="h5" gutterBottom>
+          <Typography variant="h5" gutterBottom
+          sx={{ color: "#204060" }}>
             Become a Specialist
           </Typography>
 

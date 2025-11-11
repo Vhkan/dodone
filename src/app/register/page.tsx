@@ -77,7 +77,7 @@ const Register = () => {
             variant="h5"
             textAlign="center"
             gutterBottom
-            sx={{ fontWeight: "bold", color: "#204060" }}
+            sx={{ color: "#204060" }}
           >
             Not a user yet? Register here!
           </Typography>

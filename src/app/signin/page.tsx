@@ -71,7 +71,7 @@ const SignIn = () => {
             variant="h5"
             textAlign="center"
             gutterBottom
-            sx={{ fontWeight: "bold", color: "#204060" }}
+            sx={{ color: "#204060" }}
           >
             Welcome back! Sign in to your account
           </Typography>
