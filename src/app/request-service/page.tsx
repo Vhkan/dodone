@@ -57,7 +57,7 @@ const RequestService: React.FC = () => {
         display: "flex",
         flexDirection: "column",
         overflowX: "hidden", // prevent horizontal scroll
-        overflowY: "auto",   // allow vertical scroll if content is taller
+        overflowY: "auto", // allow vertical scroll if content is taller
       }}
     >
       <Header />
@@ -70,12 +70,12 @@ const RequestService: React.FC = () => {
           flex: 1,
         }}
       >
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="h5" gutterBottom sx={{ color: "#204060" }}>
           Create a Service Request
         </Typography>
 
         {submitted && (
-          <Alert severity="success" sx={{ mb: 2 }}>
+          <Alert severity="success" sx={{ mb: 2, color: "#204060" }}>
             Your request has been submitted!
           </Alert>
         )}

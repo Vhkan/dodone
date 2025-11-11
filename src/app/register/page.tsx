@@ -77,20 +77,29 @@ const Register = () => {
             variant="h5"
             textAlign="center"
             gutterBottom
-            sx={{ fontWeight: "bold", color: "#204060" }}
+            sx={{ color: "#204060" }}
           >
             Not a user yet? Register here!
           </Typography>
 
           {/* Role selection */}
-          <Box sx={{ display: "flex", justifyContent: "center", gap: 6, mb: 3 }}>
+          <Box
+            sx={{ display: "flex", justifyContent: "center", gap: 6, mb: 3 }}
+          >
             {/* Customer */}
             <Box
-              sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
             >
               <img src="/man (2).png" alt="Customer" width={100} height={100} />
               <Button
-                variant={formData.role === "customer" ? "contained" : "outlined"}
+                variant={
+                  formData.role === "customer" ? "contained" : "outlined"
+                }
                 onClick={() => handleRoleSelect("customer")}
                 sx={{
                   width: 120,
@@ -115,11 +124,23 @@ const Register = () => {
 
             {/* Contractor */}
             <Box
-              sx={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 1 }}
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 1,
+              }}
             >
-              <img src="/mechanic (1).png" alt="Contractor" width={100} height={100} />
+              <img
+                src="/mechanic (1).png"
+                alt="Contractor"
+                width={100}
+                height={100}
+              />
               <Button
-                variant={formData.role === "contractor" ? "contained" : "outlined"}
+                variant={
+                  formData.role === "contractor" ? "contained" : "outlined"
+                }
                 onClick={() => handleRoleSelect("contractor")}
                 sx={{
                   width: 120,
@@ -218,13 +239,20 @@ const Register = () => {
           <Box sx={{ textAlign: "center", mt: 3 }}>
             <Typography variant="body1" color="text.secondary">
               Already registered?{" "}
-              <Link
+              <Button
+                variant="text"
+                sx={{
+                  textTransform: "none",
+                  fontWeight: "bold",
+                  textDecoration: "none", // no underline by default
+                  "&:hover": {
+                    textDecoration: "underline", // underline on hover
+                  },
+                }}
                 href="/signin"
-                underline="hover"
-                sx={{ color: "#0072ff", fontWeight: 500 }}
               >
                 Sign in
-              </Link>
+              </Button>
             </Typography>
           </Box>
         </Container>
